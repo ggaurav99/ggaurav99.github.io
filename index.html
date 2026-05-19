@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaurav Gupta — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=DM+Mono:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --stone:#2b2a27; --stone2:#3d3b35; --fog:#c8c4b8; --cream:#f0ece2;
+      --moss:#5a6647; --moss2:#7a8c64; --snow:#f7f5f0;
+      --rust:#b85c2a; --rust2:#d97a45;
+      --card-bg:rgba(240,236,226,0.06); --border:rgba(200,196,184,0.15); --radius:10px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--stone); color:var(--cream); font-size:16px; line-height:1.7; overflow-x:hidden; }
+
+    #hero-bg { position:fixed; top:0; left:0; right:0; height:100vh; z-index:0; pointer-events:none; }
+
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:0 3rem; display:flex; align-items:center; justify-content:space-between; height:64px; background:linear-gradient(to bottom,rgba(43,42,39,0.9),transparent); transition:background 0.4s; }
+    nav.scrolled { background:rgba(43,42,39,0.96); backdrop-filter:blur(12px); }
+    .nav-logo { font-family:'Fraunces',serif; font-size:1.3rem; color:var(--cream); text-decoration:none; font-weight:600; }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { color:var(--fog); text-decoration:none; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
+    .nav-links a:hover { color:var(--cream); }
+
+    #hero { position:relative; z-index:2; min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 3rem 5rem; max-width:none; }
+    .elevation-tag { font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.18em; color:var(--moss2); margin-bottom:1.25rem; display:flex; align-items:center; gap:0.75rem; }
+    .elevation-tag::before { content:''; display:inline-block; width:32px; height:1px; background:var(--moss2); }
+    .hero-name { font-family:'Fraunces',serif; font-size:clamp(4rem,10vw,8rem); line-height:0.95; font-weight:900; color:var(--snow); margin-bottom:1.5rem; letter-spacing:-0.03em; }
+    .hero-name span { color:var(--rust2); }
+    .hero-tagline { font-size:1rem; color:var(--fog); font-weight:300; max-width:480px; line-height:1.8; margin-bottom:2rem; }
+    .hero-cta { display:flex; gap:0.75rem; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.65rem 1.4rem; border-radius:4px; font-size:0.8rem; font-family:'Inter',sans-serif; font-weight:500; cursor:pointer; transition:all 0.25s; text-decoration:none; letter-spacing:0.06em; text-transform:uppercase; }
+    .btn-primary { background:var(--rust); color:var(--snow); border:none; }
+    .btn-primary:hover { background:var(--rust2); }
+    .btn-outline { background:transparent; color:var(--cream); border:1px solid rgba(200,196,184,0.35); }
+    .btn-outline:hover { border-color:var(--cream); }
+    .scroll-hint { position:absolute; bottom:2rem; right:3rem; display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:var(--fog); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
+    .scroll-line-v { width:1px; height:48px; background:linear-gradient(to bottom,var(--fog),transparent); }
+
+    section:not(#hero) { position:relative; z-index:2; padding:6rem 3rem; max-width:1000px; margin:0 auto; }
+    .section-label { font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--moss2); margin-bottom:0.75rem; }
+    .section-title { font-family:'Fraunces',serif; font-size:clamp(2rem,4vw,3rem); font-weight:600; line-height:1.1; color:var(--snow); margin-bottom:3rem; }
+    .section-title em { font-style:italic; color:var(--rust2); font-weight:300; }
+
+    .about-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:4rem; align-items:start; }
+    .about-text p { color:var(--fog); font-weight:300; margin-bottom:1rem; }
+    .about-text strong { color:var(--cream); font-weight:500; }
+    .trek-badges { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.5rem; }
+    .trek-badge { display:flex; align-items:center; gap:0.4rem; background:var(--card-bg); border:1px solid var(--border); border-radius:4px; padding:0.4rem 0.8rem; font-size:0.75rem; color:var(--fog); }
+    .trek-badge .dot { width:6px; height:6px; border-radius:50%; background:var(--moss2); flex-shrink:0; }
+    .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+    .stat-block { background:var(--card-bg); padding:1.5rem; }
+    .stat-num { font-family:'Fraunces',serif; font-size:2.5rem; font-weight:900; color:var(--rust2); line-height:1; }
+    .stat-unit { font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--moss2); display:block; margin-top:0.15rem; }
+    .stat-desc { font-size:0.78rem; color:var(--fog); margin-top:0.4rem; }
+
+    .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+    .skill-cat { background:var(--card-bg); padding:1.5rem; }
+    .skill-cat-title { font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--moss2); margin-bottom:1rem; }
+    .tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .tag { background:rgba(90,102,71,0.2); border:1px solid rgba(90,102,71,0.35); color:var(--fog); font-size:0.78rem; padding:0.25rem 0.65rem; border-radius:3px; }
+
+    .projects-list { display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+    .project-row { background:var(--card-bg); padding:2rem; display:grid; grid-template-columns:64px 1fr auto; gap:1.5rem; align-items:start; transition:background 0.2s; }
+    .project-row:hover { background:rgba(240,236,226,0.1); }
+    .proj-num { font-family:'Fraunces',serif; font-size:2rem; font-weight:900; color:var(--stone2); line-height:1; }
+    .proj-badge { display:inline-block; font-family:'DM Mono',monospace; font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--rust2); border:1px solid var(--rust); border-radius:3px; padding:0.15rem 0.5rem; margin-bottom:0.5rem; }
+    .proj-title { font-family:'Fraunces',serif; font-size:1.2rem; font-weight:600; color:var(--snow); margin-bottom:0.5rem; }
+    .proj-desc { font-size:0.85rem; color:var(--fog); font-weight:300; line-height:1.7; margin-bottom:1rem; }
+    .proj-stack { display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .proj-link { color:var(--rust2); font-size:0.78rem; text-decoration:none; white-space:nowrap; font-weight:500; }
+    .proj-link:hover { color:var(--cream); }
+
+    .beyond-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+    .beyond-card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:2rem; }
+    .beyond-card-title { font-family:'Fraunces',serif; font-size:1.1rem; font-weight:600; color:var(--snow); margin-bottom:1.5rem; }
+    .book-list { display:flex; flex-direction:column; }
+    .book-item { padding:0.7rem 0; border-bottom:1px solid var(--border); }
+    .book-item:last-child { border-bottom:none; }
+    .book-title { font-size:0.88rem; color:var(--cream); }
+    .book-author { font-size:0.75rem; color:var(--moss2); font-family:'DM Mono',monospace; }
+    .trek-log { display:flex; flex-direction:column; gap:0.75rem; }
+    .trek-entry { display:flex; align-items:center; gap:1rem; padding:0.75rem; background:rgba(90,102,71,0.1); border-radius:6px; border:1px solid rgba(90,102,71,0.2); }
+    .trek-alt { font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--moss2); min-width:68px; }
+    .trek-name { font-size:0.85rem; color:var(--cream); }
+    .trek-loc { font-size:0.72rem; color:var(--fog); }
+    .phil-quote { font-family:'Fraunces',serif; font-size:1rem; font-style:italic; color:var(--fog); line-height:1.8; border-left:2px solid var(--rust); padding-left:1rem; margin-bottom:1rem; }
+    .phil-note { font-size:0.83rem; color:var(--fog); font-weight:300; line-height:1.8; }
+
+    .contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:4rem; align-items:start; }
+    .contact-info p { color:var(--fog); font-weight:300; margin-bottom:2rem; line-height:1.8; }
+    .socials { display:flex; flex-direction:column; }
+    .social-link { display:flex; align-items:center; gap:1rem; color:var(--fog); text-decoration:none; font-size:0.85rem; transition:color 0.2s; padding:0.75rem 0; border-bottom:1px solid var(--border); }
+    .social-link:hover { color:var(--cream); }
+    .social-icon { font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--moss2); min-width:48px; }
+    .form { display:flex; flex-direction:column; gap:1.25rem; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .form-group { display:flex; flex-direction:column; gap:0.4rem; }
+    label { font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--moss2); }
+    input,textarea { background:var(--card-bg); border:1px solid var(--border); border-radius:5px; padding:0.75rem 1rem; font-family:'Inter',sans-serif; font-size:0.875rem; color:var(--cream); outline:none; transition:border-color 0.2s; }
+    input::placeholder,textarea::placeholder { color:rgba(200,196,184,0.3); }
+    input:focus,textarea:focus { border-color:var(--moss2); }
+    textarea { resize:vertical; min-height:120px; }
+
+    footer { position:relative; z-index:2; border-top:1px solid var(--border); padding:2rem 3rem; display:flex; justify-content:space-between; align-items:center; color:var(--fog); font-size:0.75rem; }
+    footer span { font-family:'DM Mono',monospace; color:var(--moss2); }
+
+    .fade-in { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .fade-in.visible { opacity:1; transform:none; }
+
+    @media(max-width:700px){
+      nav{padding:0 1.25rem;} .nav-links{gap:1rem;}
+      #hero{padding:0 1.25rem 4rem;}
+      section:not(#hero){padding:4rem 1.25rem;}
+      .about-grid,.beyond-grid,.contact-grid{grid-template-columns:1fr;gap:2rem;}
+      .form-row{grid-template-columns:1fr;}
+      .project-row{grid-template-columns:48px 1fr;} .proj-link{display:none;}
+      footer{flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem;}
+    }
+  </style>
+</head>
+<body>
+
+<div id="hero-bg">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+    <defs>
+      <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0d1a2e"/><stop offset="50%" stop-color="#1a2d3f"/><stop offset="100%" stop-color="#2b2a27"/>
+      </linearGradient>
+      <linearGradient id="far-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3d4e5c"/><stop offset="100%" stop-color="#2b3540"/>
+      </linearGradient>
+      <linearGradient id="mid-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2e3d28"/><stop offset="100%" stop-color="#1e2a1c"/>
+      </linearGradient>
+      <linearGradient id="fore-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1e2418"/><stop offset="100%" stop-color="#131710"/>
+      </linearGradient>
+      <linearGradient id="fade-bot" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2b2a27" stop-opacity="0"/><stop offset="100%" stop-color="#2b2a27" stop-opacity="1"/>
+      </linearGradient>
+    </defs>
+    <rect width="1440" height="900" fill="url(#sky-grad)"/>
+    <circle cx="120" cy="60" r="1.2" fill="#c8c4b8" opacity="0.8"/>
+    <circle cx="240" cy="30" r="0.8" fill="#c8c4b8" opacity="0.6"/>
+    <circle cx="380" cy="80" r="1" fill="#c8c4b8" opacity="0.7"/>
+    <circle cx="500" cy="45" r="1.4" fill="#c8c4b8" opacity="0.9"/>
+    <circle cx="620" cy="20" r="0.9" fill="#c8c4b8" opacity="0.7"/>
+    <circle cx="740" cy="70" r="1.1" fill="#c8c4b8" opacity="0.8"/>
+    <circle cx="860" cy="35" r="0.7" fill="#c8c4b8" opacity="0.6"/>
+    <circle cx="980" cy="55" r="1.3" fill="#c8c4b8" opacity="0.8"/>
+    <circle cx="1100" cy="25" r="1" fill="#c8c4b8" opacity="0.7"/>
+    <circle cx="1220" cy="75" r="0.8" fill="#c8c4b8" opacity="0.6"/>
+    <circle cx="1350" cy="40" r="1.2" fill="#c8c4b8" opacity="0.8"/>
+    <circle cx="180" cy="110" r="0.7" fill="#9ab0c4" opacity="0.5"/>
+    <circle cx="440" cy="130" r="0.9" fill="#9ab0c4" opacity="0.5"/>
+    <circle cx="680" cy="100" r="0.7" fill="#9ab0c4" opacity="0.5"/>
+    <circle cx="920" cy="120" r="1" fill="#9ab0c4" opacity="0.5"/>
+    <circle cx="1160" cy="95" r="0.8" fill="#9ab0c4" opacity="0.5"/>
+    <circle cx="60" cy="150" r="0.9" fill="#c8c4b8" opacity="0.4"/>
+    <circle cx="310" cy="165" r="0.7" fill="#c8c4b8" opacity="0.4"/>
+    <circle cx="810" cy="160" r="0.8" fill="#c8c4b8" opacity="0.4"/>
+    <circle cx="1280" cy="90" r="30" fill="#e4e0d4" opacity="0.85"/>
+    <circle cx="1294" cy="81" r="24" fill="#1a2d3f" opacity="0.95"/>
+    <path d="M0 520 L80 370 L160 430 L280 285 L400 380 L500 305 L620 255 L720 340 L820 275 L920 360 L1040 235 L1150 325 L1260 265 L1360 350 L1440 295 L1440 900 L0 900 Z" fill="url(#far-grad)" opacity="0.55"/>
+    <path d="M280 285 L312 332 L248 332 Z" fill="#dedad0" opacity="0.45"/>
+    <path d="M620 255 L654 303 L586 303 Z" fill="#dedad0" opacity="0.38"/>
+    <path d="M1040 235 L1078 286 L1002 286 Z" fill="#dedad0" opacity="0.5"/>
+    <path d="M0 625 L100 468 L200 528 L340 395 L460 478 L560 415 L680 375 L780 448 L880 385 L1000 458 L1100 395 L1200 468 L1300 415 L1380 488 L1440 445 L1440 900 L0 900 Z" fill="url(#mid-grad)" opacity="0.85"/>
+    <path d="M340 395 L372 440 L308 440 Z" fill="#c8c4b8" opacity="0.22"/>
+    <path d="M680 375 L714 422 L646 422 Z" fill="#c8c4b8" opacity="0.18"/>
+    <path d="M0 755 L120 638 L260 702 L380 618 L520 682 L640 608 L760 672 L880 598 L1020 662 L1160 588 L1300 652 L1440 598 L1440 900 L0 900 Z" fill="url(#fore-grad)"/>
+    <g fill="#0f1409" opacity="0.85">
+      <polygon points="28,812 39,762 50,812"/><polygon points="52,822 65,770 78,822"/>
+      <polygon points="18,832 31,792 44,832"/><polygon points="78,816 90,772 102,816"/>
+      <polygon points="258,782 271,732 284,782"/><polygon points="278,792 292,742 306,792"/>
+      <polygon points="243,797 257,752 271,797"/>
+      <polygon points="578,762 593,707 608,762"/><polygon points="604,772 618,720 632,772"/>
+      <polygon points="558,777 573,730 588,777"/><polygon points="628,767 642,717 656,767"/>
+      <polygon points="1198,757 1212,702 1226,757"/><polygon points="1223,767 1237,714 1251,767"/>
+      <polygon points="1178,770 1193,722 1208,770"/>
+      <polygon points="1378,772 1391,724 1404,772"/><polygon points="1398,782 1412,732 1426,782"/>
+    </g>
+    <rect x="0" y="700" width="1440" height="200" fill="url(#fade-bot)"/>
+  </svg>
+</div>
+
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">GG.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#beyond">Beyond</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="elevation-tag">32.2432°N 77.1892°E · 14,009 ft — Bhrigu Lake</div>
+  <h1 class="hero-name">Gaurav<br><span>Gupta</span></h1>
+  <p class="hero-tagline">Mathematician. Researcher. Someone who thinks better above the treeline.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View research</a>
+    <a href="#contact" class="btn btn-outline">Get in touch</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line-v"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="fade-in">
+    <div class="section-label">01 — About me</div>
+    <h2 class="section-title">Mathematician by training,<br><em>trekker by calling</em></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm Gaurav — a recent graduate from <strong>Shiv Nadar University</strong> with a <strong>BSc (Research) in Mathematics</strong>, specialising in Mathematical Finance. I work at the intersection of mathematical modelling, behavioural science, and computational neuroscience.</p>
+        <p>I'm drawn to problems where rigorous mathematics meets the messiness of human behaviour — whether that's how people make decisions during an epidemic, or how the brain's wiring relates to anxiety.</p>
+        <p>When I'm not buried in papers, I'm somewhere on a trail in Himachal Pradesh, usually above 10,000 feet, where the questions get quieter and the thinking gets clearer.</p>
+        <div class="trek-badges">
+          <div class="trek-badge"><div class="dot"></div> Himachal Pradesh</div>
+          <div class="trek-badge"><div class="dot"></div> Himalayas</div>
+          <div class="trek-badge"><div class="dot"></div> Parvati Valley</div>
+          <div class="trek-badge"><div class="dot"></div> Kullu</div>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-block">
+          <div class="stat-num">2</div>
+          <span class="stat-unit">research projects</span>
+          <div class="stat-desc">in epi & neuroscience</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">14k</div>
+          <span class="stat-unit">feet</span>
+          <div class="stat-desc">highest point reached</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">5</div>
+          <span class="stat-unit">treks completed</span>
+          <div class="stat-desc">across Himachal</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">∞</div>
+          <span class="stat-unit">questions</span>
+          <div class="stat-desc">the trail always continues</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="fade-in">
+    <div class="section-label">02 — Skills</div>
+    <h2 class="section-title">Tools &amp; terrain</h2>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <div class="skill-cat-title">Mathematics</div>
+        <div class="tags">
+          <span class="tag">Game Theory</span><span class="tag">ODE Modelling</span>
+          <span class="tag">Behavioural Economics</span><span class="tag">Probability</span><span class="tag">Mathematical Finance</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Programming</div>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">MATLAB</span>
+          <span class="tag">R</span><span class="tag">NumPy</span><span class="tag">SciPy</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Research</div>
+        <div class="tags">
+          <span class="tag">Epidemiological Modelling</span><span class="tag">Network Control Theory</span>
+          <span class="tag">Computational Neuroscience</span><span class="tag">LaTeX</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Currently exploring</div>
+        <div class="tags">
+          <span class="tag">Brain Connectomics</span><span class="tag">Machine Learning</span><span class="tag">Psychoanalytic Theory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="fade-in">
+    <div class="section-label">03 — Research</div>
+    <h2 class="section-title">Problems I've <em>climbed</em></h2>
+    <div class="projects-list">
+
+      <div class="project-row">
+        <div class="proj-num">01</div>
+        <div>
+          <div class="proj-badge">Thesis · Epidemiology</div>
+          <div class="proj-title">SVITR Disease Model with Behavioural Dynamics</div>
+          <p class="proj-desc">
+            Built a coupled epidemiological-behavioural model where disease dynamics are shaped by individual decision-making. The key innovation: people don't perceive objective probabilities (like disease severity) at face value. Using the <strong style="color:var(--cream)">Prelec probability weighting function</strong>, we capture how optimism, skepticism, and information access distort perceived risk. Combined with <strong style="color:var(--cream)">hyperbolic discounting</strong> — which models how impatience affects decisions over time — the model computes perceived payoffs for each strategy (vaccination, antibiotics, or none). These payoffs then feed back into disease dynamics, making the model a genuine two-way system between behaviour and contagion.
+          </p>
+          <div class="proj-stack tags">
+            <span class="tag">Python</span><span class="tag">ODE Systems</span><span class="tag">Game Theory</span><span class="tag">Prelec Function</span><span class="tag">Hyperbolic Discounting</span>
+          </div>
+        </div>
+        <a href="https://github.com/ggaurav99" class="proj-link" target="_blank">GitHub ↗</a>
+      </div>
+
+      <div class="project-row">
+        <div class="proj-num">02</div>
+        <div>
+          <div class="proj-badge">Ongoing · Computational Neuroscience</div>
+          <div class="proj-title">Brain Controllability &amp; Trait Anxiety Correlates</div>
+          <p class="proj-desc">
+            The standard way to diagnose trait anxiety is the STAI — a pen-and-paper self-report test that depends entirely on the honesty of the patient. We're building an objective alternative. Using <strong style="color:var(--cream)">Network Control Theory</strong> applied to brain connectomes, we assess the controllability of different brain regions — essentially, how easily each region can steer the brain into different activity states. The goal: find controllability metrics that correlate with STAI scores, so that a clinician can run brain scans and compute a diagnosis without the patient needing to self-report at all.
+          </p>
+          <div class="proj-stack tags">
+            <span class="tag">Python</span><span class="tag">Network Control Theory</span><span class="tag">Brain Connectomes</span><span class="tag">STAI</span><span class="tag">fMRI</span>
+          </div>
+        </div>
+        <a href="https://github.com/ggaurav99" class="proj-link" target="_blank">GitHub ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="beyond">
+  <div class="fade-in">
+    <div class="section-label">04 — Beyond research</div>
+    <h2 class="section-title">What I read &amp;<br><em>where I wander</em></h2>
+    <div class="beyond-grid">
+
+      <div class="beyond-card">
+        <div class="beyond-card-title">📚 Bookshelf</div>
+        <div class="book-list">
+          <div class="book-item"><div class="book-title">The Story of Philosophy</div><div class="book-author">Will Durant</div></div>
+          <div class="book-item"><div class="book-title">The Plague</div><div class="book-author">Albert Camus</div></div>
+          <div class="book-item"><div class="book-title">The Fourth K</div><div class="book-author">Mario Puzo</div></div>
+          <div class="book-item"><div class="book-title">The Godfather</div><div class="book-author">Mario Puzo</div></div>
+          <div class="book-item"><div class="book-title">Lacan</div><div class="book-author">Sean Homer</div></div>
+          <div class="book-item"><div class="book-title">Sigmund Freud</div><div class="book-author">Pamela Thurschwell</div></div>
+          <div class="book-item"><div class="book-title">A Critical Survey of Indian Philosophy</div><div class="book-author">C.D. Sharma</div></div>
+        </div>
+      </div>
+
+      <div class="beyond-card">
+        <div class="beyond-card-title">🏔 Trek log</div>
+        <div class="trek-log">
+          <div class="trek-entry">
+            <div class="trek-alt">14,010 ft</div>
+            <div><div class="trek-name">Hampta Pass</div><div class="trek-loc">Kullu, Himachal Pradesh</div></div>
+          </div>
+          <div class="trek-entry">
+            <div class="trek-alt">14,009 ft</div>
+            <div><div class="trek-name">Bhrigu Lake</div><div class="trek-loc">Manali, Himachal Pradesh</div></div>
+          </div>
+          <div class="trek-entry">
+            <div class="trek-alt">13,850 ft</div>
+            <div><div class="trek-name">Sar Pass</div><div class="trek-loc">Parvati Valley, Himachal Pradesh</div></div>
+          </div>
+          <div class="trek-entry">
+            <div class="trek-alt">9,711 ft</div>
+            <div><div class="trek-name">Kheerganga</div><div class="trek-loc">Parvati Valley, Himachal Pradesh</div></div>
+          </div>
+          <div class="trek-entry">
+            <div class="trek-alt">9,430 ft</div>
+            <div><div class="trek-name">Triund</div><div class="trek-loc">Dharamshala, Himachal Pradesh</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="beyond-card" style="grid-column:1/-1;">
+        <div class="beyond-card-title">💭 On philosophy &amp; expanding horizons</div>
+        <p class="phil-quote">"Books allow me to inhabit minds shaped by completely different times, places, and circumstances — and that is the most reliable way I know to think beyond myself."</p>
+        <p class="phil-note">
+          My relationship with philosophy began not in a classroom but through a personal inflection point — an experience that forced me to question whether what I believed was genuinely mine, or simply the product of my surroundings: family, peers, school, the particular corner of society I grew up in. It was, in retrospect, an encounter with survivorship bias — and I didn't survive it, metaphorically speaking.
+        </p>
+        <br>
+        <p class="phil-note">
+          That sent me to <em>Sophie's World</em>, then Will Durant, then a critical survey of Indian philosophy. What struck me was simple: people who lived centuries ago, in completely different parts of the world, with no shared cultural context — thought radically differently. If they could arrive at such different conclusions, how certain could I be about my own? Books became the tool for borrowing 60–70 years of someone else's thinking in 300 pages. That still strikes me as an extraordinary deal.
+        </p>
+        <br>
+        <p class="phil-note">
+          Today my interests span Stoicism, psychoanalytic theory (Freud, Lacan), the philosophy of mind, and the question of what it means to think freely in a world that is constantly trying to think for you. The mountains help too — there's something about altitude that strips away noise and forces clarity.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="fade-in">
+    <div class="section-label">05 — Contact</div>
+    <h2 class="section-title">Let's find the<br><em>trailhead together</em></h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Whether it's research collaboration, an interesting problem, a book recommendation, or a trek you think I should do — reach out. I read everything.</p>
+        <div class="socials">
+          <a href="https://github.com/ggaurav99" class="social-link" target="_blank">
+            <span class="social-icon">gh://</span><span>github.com/ggaurav99</span>
+          </a>
+          <a href="https://www.linkedin.com/in/gaurav-gupta-a566aa278/" class="social-link" target="_blank">
+            <span class="social-icon">li://</span><span>linkedin.com/in/gaurav-gupta</span>
+          </a>
+          <a href="mailto:gg629@snu.edu.in" class="social-link">
+            <span class="social-icon">✉</span><span>gg629@snu.edu.in</span>
+          </a>
+        </div>
+      </div>
+      <form class="form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label for="fname">Name</label><input type="text" id="fname" placeholder="Your name" required /></div>
+          <div class="form-group"><label for="femail">Email</label><input type="email" id="femail" placeholder="your@email.com" required /></div>
+        </div>
+        <div class="form-group"><label for="fsubject">Subject</label><input type="text" id="fsubject" placeholder="What's this about?" /></div>
+        <div class="form-group"><label for="fmessage">Message</label><textarea id="fmessage" placeholder="Tell me what's on your mind..." required></textarea></div>
+        <button type="submit" class="btn btn-primary" id="submit-btn" style="align-self:flex-start">Send message →</button>
+        <p id="form-status" style="font-size:0.82rem;color:var(--moss2);display:none;font-family:'DM Mono',monospace;">Message received. I'll be in touch.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Gaurav Gupta · BSc Mathematics, Shiv Nadar University</p>
+  <span>32.2432°N · 77.1892°E · Bhrigu Lake</span>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+    document.getElementById('hero-bg').style.transform = `translateY(${window.scrollY * 0.3}px)`;
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending...'; btn.disabled = true;
+    setTimeout(() => { btn.style.display='none'; document.getElementById('form-status').style.display='block'; }, 1000);
+  }
+</script>
+</body>
+</html>
