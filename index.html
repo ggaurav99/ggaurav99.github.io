@@ -3,270 +3,320 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gaurav Gupta — Portfolio</title>
+  <title>Gaurav Gupta — Mathematician</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=DM+Mono:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --stone:#2b2a27; --stone2:#3d3b35; --fog:#c8c4b8; --cream:#f0ece2;
-      --moss:#5a6647; --moss2:#7a8c64; --snow:#f7f5f0;
-      --rust:#b85c2a; --rust2:#d97a45;
-      --card-bg:rgba(240,236,226,0.06); --border:rgba(200,196,184,0.15); --radius:10px;
+      --bg:        #0a0b10;
+      --bg2:       #10111a;
+      --slate:     #181926;
+      --slate2:    #202230;
+      --violet:    #7c6fcd;
+      --violet2:   #a99fe0;
+      --violet-dim:rgba(124,111,205,0.15);
+      --cream:     #e8e6f0;
+      --fog:       #9e9bb8;
+      --muted:     #52506a;
+      --rule:      rgba(124,111,205,0.12);
+      --rule2:     rgba(124,111,205,0.22);
+      --radius:    4px;
     }
     html { scroll-behavior: smooth; }
-    body { font-family:'Inter',sans-serif; background:var(--stone); color:var(--cream); font-size:16px; line-height:1.7; overflow-x:hidden; }
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--bg);
+      color: var(--cream);
+      font-size: 16px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
 
-    #hero-bg { position:fixed; top:0; left:0; right:0; height:100vh; z-index:0; pointer-events:none; }
+    #bg-canvas {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    }
 
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:0 3rem; display:flex; align-items:center; justify-content:space-between; height:64px; background:linear-gradient(to bottom,rgba(43,42,39,0.9),transparent); transition:background 0.4s; }
-    nav.scrolled { background:rgba(43,42,39,0.96); backdrop-filter:blur(12px); }
-    .nav-logo { font-family:'Fraunces',serif; font-size:1.3rem; color:var(--cream); text-decoration:none; font-weight:600; }
-    .nav-links { display:flex; gap:2rem; list-style:none; }
-    .nav-links a { color:var(--fog); text-decoration:none; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
-    .nav-links a:hover { color:var(--cream); }
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 3.5rem; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10,11,16,0.9);
+      backdrop-filter: blur(14px);
+      border-color: var(--rule);
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem; letter-spacing: 0.14em;
+      color: var(--violet2); text-decoration: none; text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace; font-size: 0.67rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
 
-    #hero { position:relative; z-index:2; min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 3rem 5rem; max-width:none; }
-    .elevation-tag { font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.18em; color:var(--moss2); margin-bottom:1.25rem; display:flex; align-items:center; gap:0.75rem; }
-    .elevation-tag::before { content:''; display:inline-block; width:32px; height:1px; background:var(--moss2); }
-    .hero-name { font-family:'Fraunces',serif; font-size:clamp(4rem,10vw,8rem); line-height:0.95; font-weight:900; color:var(--snow); margin-bottom:1.5rem; letter-spacing:-0.03em; }
-    .hero-name span { color:var(--rust2); }
-    .hero-tagline { font-size:1rem; color:var(--fog); font-weight:300; max-width:480px; line-height:1.8; margin-bottom:2rem; }
-    .hero-cta { display:flex; gap:0.75rem; flex-wrap:wrap; }
-    .btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.65rem 1.4rem; border-radius:4px; font-size:0.8rem; font-family:'Inter',sans-serif; font-weight:500; cursor:pointer; transition:all 0.25s; text-decoration:none; letter-spacing:0.06em; text-transform:uppercase; }
-    .btn-primary { background:var(--rust); color:var(--snow); border:none; }
-    .btn-primary:hover { background:var(--rust2); }
-    .btn-outline { background:transparent; color:var(--cream); border:1px solid rgba(200,196,184,0.35); }
-    .btn-outline:hover { border-color:var(--cream); }
-    .scroll-hint { position:absolute; bottom:2rem; right:3rem; display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:var(--fog); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; }
-    .scroll-line-v { width:1px; height:48px; background:linear-gradient(to bottom,var(--fog),transparent); }
+    /* HERO — topics first, name at top */
+    #hero {
+      position: relative; z-index: 2;
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 3.5rem 6rem;
+      max-width: 900px;
+    }
+    .hero-name-small {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    .hero-topics {
+      margin-bottom: 2.5rem;
+    }
+    .hero-topic-line {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5.5vw, 4rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      display: block;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: topicIn 0.7s forwards;
+    }
+    .hero-topic-line:nth-child(1) { animation-delay: 0.1s; }
+    .hero-topic-line:nth-child(2) {
+      animation-delay: 0.25s;
+      font-style: italic; font-weight: 400; color: var(--violet2);
+    }
+    .hero-topic-line:nth-child(3) { animation-delay: 0.4s; }
 
-    section:not(#hero) { position:relative; z-index:2; padding:6rem 3rem; max-width:1000px; margin:0 auto; }
-    .section-label { font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--moss2); margin-bottom:0.75rem; }
-    .section-title { font-family:'Fraunces',serif; font-size:clamp(2rem,4vw,3rem); font-weight:600; line-height:1.1; color:var(--snow); margin-bottom:3rem; }
-    .section-title em { font-style:italic; color:var(--rust2); font-weight:300; }
+    @keyframes topicIn {
+      to { opacity: 1; transform: none; }
+    }
 
-    .about-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:4rem; align-items:start; }
-    .about-text p { color:var(--fog); font-weight:300; margin-bottom:1rem; }
-    .about-text strong { color:var(--cream); font-weight:500; }
-    .trek-badges { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.5rem; }
-    .trek-badge { display:flex; align-items:center; gap:0.4rem; background:var(--card-bg); border:1px solid var(--border); border-radius:4px; padding:0.4rem 0.8rem; font-size:0.75rem; color:var(--fog); }
-    .trek-badge .dot { width:6px; height:6px; border-radius:50%; background:var(--moss2); flex-shrink:0; }
-    .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
-    .stat-block { background:var(--card-bg); padding:1.5rem; }
-    .stat-num { font-family:'Fraunces',serif; font-size:2.5rem; font-weight:900; color:var(--rust2); line-height:1; }
-    .stat-unit { font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--moss2); display:block; margin-top:0.15rem; }
-    .stat-desc { font-size:0.78rem; color:var(--fog); margin-top:0.4rem; }
+    .hero-rule {
+      width: min(420px, 100%); height: 1px;
+      background: linear-gradient(to right, var(--violet), transparent);
+      margin: 2rem 0;
+    }
+    .hero-sub {
+      font-family: 'Source Serif 4', serif; font-size: 0.97rem;
+      font-weight: 300; font-style: italic; color: var(--fog);
+      margin-bottom: 0.4rem; max-width: 480px;
+    }
+    .hero-institution {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.09em; color: var(--muted); margin-bottom: 2.75rem;
+    }
+    .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.6rem 1.3rem; border: none; border-radius: var(--radius);
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--violet); color: #fff; }
+    .btn-primary:hover { background: var(--violet2); }
+    .btn-outline { background: transparent; color: var(--cream); border: 1px solid var(--rule2); }
+    .btn-outline:hover { border-color: var(--violet2); color: var(--violet2); }
 
-    .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
-    .skill-cat { background:var(--card-bg); padding:1.5rem; }
-    .skill-cat-title { font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--moss2); margin-bottom:1rem; }
-    .tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
-    .tag { background:rgba(90,102,71,0.2); border:1px solid rgba(90,102,71,0.35); color:var(--fog); font-size:0.78rem; padding:0.25rem 0.65rem; border-radius:3px; }
+    /* SECTIONS */
+    section:not(#hero) {
+      position: relative; z-index: 2;
+      padding: 6rem 3.5rem; max-width: 860px; margin: 0 auto;
+    }
+    .section-header {
+      display: flex; align-items: baseline; gap: 1.5rem;
+      margin-bottom: 3rem; padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rule2);
+    }
+    .section-label {
+      font-family: 'DM Mono', monospace; font-size: 0.63rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--violet); flex-shrink: 0;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600;
+      line-height: 1.15; color: var(--cream);
+    }
+    .section-title em { font-style: italic; font-weight: 400; color: var(--violet2); }
 
-    .projects-list { display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
-    .project-row { background:var(--card-bg); padding:2rem; display:grid; grid-template-columns:64px 1fr auto; gap:1.5rem; align-items:start; transition:background 0.2s; }
-    .project-row:hover { background:rgba(240,236,226,0.1); }
-    .proj-num { font-family:'Fraunces',serif; font-size:2rem; font-weight:900; color:var(--stone2); line-height:1; }
-    .proj-badge { display:inline-block; font-family:'DM Mono',monospace; font-size:0.62rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--rust2); border:1px solid var(--rust); border-radius:3px; padding:0.15rem 0.5rem; margin-bottom:0.5rem; }
-    .proj-title { font-family:'Fraunces',serif; font-size:1.2rem; font-weight:600; color:var(--snow); margin-bottom:0.5rem; }
-    .proj-desc { font-size:0.85rem; color:var(--fog); font-weight:300; line-height:1.7; margin-bottom:1rem; }
-    .proj-stack { display:flex; flex-wrap:wrap; gap:0.4rem; }
-    .proj-link { color:var(--rust2); font-size:0.78rem; text-decoration:none; white-space:nowrap; font-weight:500; }
-    .proj-link:hover { color:var(--cream); }
+    /* ABOUT */
+    .about-body { display: grid; grid-template-columns: 1.4fr 1fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--fog); font-weight: 300; margin-bottom: 1.1rem; font-size: 0.97rem; }
+    .about-text p strong { color: var(--cream); font-weight: 400; }
+    .aside-box { background: var(--slate); border: 1px solid var(--rule2); border-radius: var(--radius); padding: 1.5rem; }
+    .aside-box-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--violet); margin-bottom: 1.25rem; }
+    .stat-pair { margin-bottom: 1.1rem; }
+    .stat-pair:last-child { margin-bottom: 0; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--cream); line-height: 1; }
+    .stat-desc { font-size: 0.74rem; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 0.05em; margin-top: 0.1rem; }
+    .aside-divider { height: 1px; background: var(--rule); margin: 1.1rem 0; }
 
-    .beyond-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
-    .beyond-card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); padding:2rem; }
-    .beyond-card-title { font-family:'Fraunces',serif; font-size:1.1rem; font-weight:600; color:var(--snow); margin-bottom:1.5rem; }
-    .book-list { display:flex; flex-direction:column; }
-    .book-item { padding:0.7rem 0; border-bottom:1px solid var(--border); }
-    .book-item:last-child { border-bottom:none; }
-    .book-title { font-size:0.88rem; color:var(--cream); }
-    .book-author { font-size:0.75rem; color:var(--moss2); font-family:'DM Mono',monospace; }
-    .trek-log { display:flex; flex-direction:column; gap:0.75rem; }
-    .trek-entry { display:flex; align-items:center; gap:1rem; padding:0.75rem; background:rgba(90,102,71,0.1); border-radius:6px; border:1px solid rgba(90,102,71,0.2); }
-    .trek-alt { font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--moss2); min-width:68px; }
-    .trek-name { font-size:0.85rem; color:var(--cream); }
-    .trek-loc { font-size:0.72rem; color:var(--fog); }
-    .phil-quote { font-family:'Fraunces',serif; font-size:1rem; font-style:italic; color:var(--fog); line-height:1.8; border-left:2px solid var(--rust); padding-left:1rem; margin-bottom:1rem; }
-    .phil-note { font-size:0.83rem; color:var(--fog); font-weight:300; line-height:1.8; }
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--rule2); border: 1px solid var(--rule2); border-radius: var(--radius); overflow: hidden; }
+    .skill-cat { background: var(--bg2); padding: 1.75rem; }
+    .skill-cat-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--violet); margin-bottom: 1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag { background: var(--violet-dim); border: 1px solid var(--rule2); color: var(--fog); font-size: 0.78rem; padding: 0.22rem 0.65rem; border-radius: 2px; font-family: 'Source Serif 4', serif; font-style: italic; }
 
-    .contact-grid { display:grid; grid-template-columns:1fr 1.3fr; gap:4rem; align-items:start; }
-    .contact-info p { color:var(--fog); font-weight:300; margin-bottom:2rem; line-height:1.8; }
-    .socials { display:flex; flex-direction:column; }
-    .social-link { display:flex; align-items:center; gap:1rem; color:var(--fog); text-decoration:none; font-size:0.85rem; transition:color 0.2s; padding:0.75rem 0; border-bottom:1px solid var(--border); }
-    .social-link:hover { color:var(--cream); }
-    .social-icon { font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--moss2); min-width:48px; }
-    .form { display:flex; flex-direction:column; gap:1.25rem; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-    .form-group { display:flex; flex-direction:column; gap:0.4rem; }
-    label { font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--moss2); }
-    input,textarea { background:var(--card-bg); border:1px solid var(--border); border-radius:5px; padding:0.75rem 1rem; font-family:'Inter',sans-serif; font-size:0.875rem; color:var(--cream); outline:none; transition:border-color 0.2s; }
-    input::placeholder,textarea::placeholder { color:rgba(200,196,184,0.3); }
-    input:focus,textarea:focus { border-color:var(--moss2); }
-    textarea { resize:vertical; min-height:120px; }
+    /* PROJECTS */
+    .projects-list { display: flex; flex-direction: column; gap: 2px; }
+    .project-card { background: var(--bg2); border: 1px solid var(--rule2); border-radius: var(--radius); padding: 2rem 2.25rem; transition: border-color 0.25s, background 0.25s; }
+    .project-card:hover { border-color: var(--violet); background: var(--slate); }
+    .proj-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.85rem; }
+    .proj-badge { font-family: 'DM Mono', monospace; font-size: 0.59rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--violet2); border: 1px solid var(--violet); border-radius: 2px; padding: 0.15rem 0.55rem; }
+    .proj-status { font-family: 'DM Mono', monospace; font-size: 0.61rem; color: var(--muted); letter-spacing: 0.08em; }
+    .proj-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--cream); margin-bottom: 0.75rem; line-height: 1.3; }
+    .proj-desc { font-size: 0.9rem; color: var(--fog); font-weight: 300; line-height: 1.85; margin-bottom: 1.25rem; }
+    .proj-desc strong { color: var(--cream); font-weight: 400; }
+    .proj-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+    .proj-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .proj-link { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.08em; color: var(--violet2); text-decoration: none; transition: color 0.2s; }
+    .proj-link:hover { color: var(--cream); }
 
-    footer { position:relative; z-index:2; border-top:1px solid var(--border); padding:2rem 3rem; display:flex; justify-content:space-between; align-items:center; color:var(--fog); font-size:0.75rem; }
-    footer span { font-family:'DM Mono',monospace; color:var(--moss2); }
+    /* BEYOND */
+    .beyond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .beyond-card { background: var(--bg2); border: 1px solid var(--rule2); border-radius: var(--radius); padding: 1.75rem; }
+    .beyond-card-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--cream); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule); }
+    .book-item { padding: 0.65rem 0; border-bottom: 1px solid var(--rule); }
+    .book-item:last-child { border-bottom: none; }
+    .book-title { font-size: 0.88rem; color: var(--cream); font-style: italic; }
+    .book-author { font-family: 'DM Mono', monospace; font-size: 0.67rem; color: var(--muted); margin-top: 0.1rem; }
+    .trek-log { display: flex; flex-direction: column; gap: 0.55rem; }
+    .trek-entry { display: flex; align-items: baseline; gap: 1rem; padding: 0.6rem 0.75rem; border: 1px solid var(--rule); border-radius: 2px; }
+    .trek-alt { font-family: 'DM Mono', monospace; font-size: 0.64rem; color: var(--violet); min-width: 64px; flex-shrink: 0; }
+    .trek-name { font-size: 0.85rem; color: var(--cream); }
+    .trek-loc { font-size: 0.71rem; color: var(--muted); }
+    .beyond-card-wide { grid-column: 1/-1; }
+    .phil-quote { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-style: italic; color: var(--fog); line-height: 1.9; border-left: 2px solid var(--violet); padding-left: 1.25rem; margin-bottom: 1.25rem; }
+    .phil-note { font-size: 0.9rem; color: var(--fog); font-weight: 300; line-height: 1.9; margin-bottom: 0.9rem; }
 
-    .fade-in { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
-    .fade-in.visible { opacity:1; transform:none; }
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: start; }
+    .contact-info p { font-size: 0.95rem; color: var(--fog); font-weight: 300; line-height: 1.85; margin-bottom: 2rem; }
+    .socials { display: flex; flex-direction: column; }
+    .social-link { display: flex; align-items: center; gap: 1rem; color: var(--fog); text-decoration: none; font-size: 0.85rem; padding: 0.75rem 0; border-bottom: 1px solid var(--rule); transition: color 0.2s; }
+    .social-link:hover { color: var(--cream); }
+    .social-icon { font-family: 'DM Mono', monospace; font-size: 0.64rem; color: var(--violet); min-width: 44px; }
+    .form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--violet); }
+    input, textarea { background: var(--slate); border: 1px solid var(--rule2); border-radius: var(--radius); padding: 0.7rem 0.9rem; font-family: 'Source Serif 4', serif; font-size: 0.875rem; color: var(--cream); outline: none; transition: border-color 0.2s; }
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+    input:focus, textarea:focus { border-color: var(--violet); }
+    textarea { resize: vertical; min-height: 120px; }
 
-    @media(max-width:700px){
-      nav{padding:0 1.25rem;} .nav-links{gap:1rem;}
-      #hero{padding:0 1.25rem 4rem;}
-      section:not(#hero){padding:4rem 1.25rem;}
-      .about-grid,.beyond-grid,.contact-grid{grid-template-columns:1fr;gap:2rem;}
-      .form-row{grid-template-columns:1fr;}
-      .project-row{grid-template-columns:48px 1fr;} .proj-link{display:none;}
-      footer{flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem;}
+    /* FOOTER */
+    footer { position: relative; z-index: 2; border-top: 1px solid var(--rule2); padding: 2rem 3.5rem; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
+
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      nav { padding: 0 1.25rem; } .nav-links { gap: 1.1rem; }
+      #hero { padding: 7rem 1.25rem 4rem; }
+      section:not(#hero) { padding: 4rem 1.25rem; }
+      .about-body, .beyond-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .beyond-card-wide { grid-column: auto; }
+      footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; text-align: center; }
+      .hero-topic-line { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in, .hero-topic-line { transition: none; animation: none; opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
 
-<div id="hero-bg">
-  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-    <defs>
-      <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#0d1a2e"/><stop offset="50%" stop-color="#1a2d3f"/><stop offset="100%" stop-color="#2b2a27"/>
-      </linearGradient>
-      <linearGradient id="far-grad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#3d4e5c"/><stop offset="100%" stop-color="#2b3540"/>
-      </linearGradient>
-      <linearGradient id="mid-grad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#2e3d28"/><stop offset="100%" stop-color="#1e2a1c"/>
-      </linearGradient>
-      <linearGradient id="fore-grad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#1e2418"/><stop offset="100%" stop-color="#131710"/>
-      </linearGradient>
-      <linearGradient id="fade-bot" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#2b2a27" stop-opacity="0"/><stop offset="100%" stop-color="#2b2a27" stop-opacity="1"/>
-      </linearGradient>
-    </defs>
-    <rect width="1440" height="900" fill="url(#sky-grad)"/>
-    <circle cx="120" cy="60" r="1.2" fill="#c8c4b8" opacity="0.8"/>
-    <circle cx="240" cy="30" r="0.8" fill="#c8c4b8" opacity="0.6"/>
-    <circle cx="380" cy="80" r="1" fill="#c8c4b8" opacity="0.7"/>
-    <circle cx="500" cy="45" r="1.4" fill="#c8c4b8" opacity="0.9"/>
-    <circle cx="620" cy="20" r="0.9" fill="#c8c4b8" opacity="0.7"/>
-    <circle cx="740" cy="70" r="1.1" fill="#c8c4b8" opacity="0.8"/>
-    <circle cx="860" cy="35" r="0.7" fill="#c8c4b8" opacity="0.6"/>
-    <circle cx="980" cy="55" r="1.3" fill="#c8c4b8" opacity="0.8"/>
-    <circle cx="1100" cy="25" r="1" fill="#c8c4b8" opacity="0.7"/>
-    <circle cx="1220" cy="75" r="0.8" fill="#c8c4b8" opacity="0.6"/>
-    <circle cx="1350" cy="40" r="1.2" fill="#c8c4b8" opacity="0.8"/>
-    <circle cx="180" cy="110" r="0.7" fill="#9ab0c4" opacity="0.5"/>
-    <circle cx="440" cy="130" r="0.9" fill="#9ab0c4" opacity="0.5"/>
-    <circle cx="680" cy="100" r="0.7" fill="#9ab0c4" opacity="0.5"/>
-    <circle cx="920" cy="120" r="1" fill="#9ab0c4" opacity="0.5"/>
-    <circle cx="1160" cy="95" r="0.8" fill="#9ab0c4" opacity="0.5"/>
-    <circle cx="60" cy="150" r="0.9" fill="#c8c4b8" opacity="0.4"/>
-    <circle cx="310" cy="165" r="0.7" fill="#c8c4b8" opacity="0.4"/>
-    <circle cx="810" cy="160" r="0.8" fill="#c8c4b8" opacity="0.4"/>
-    <circle cx="1280" cy="90" r="30" fill="#e4e0d4" opacity="0.85"/>
-    <circle cx="1294" cy="81" r="24" fill="#1a2d3f" opacity="0.95"/>
-    <path d="M0 520 L80 370 L160 430 L280 285 L400 380 L500 305 L620 255 L720 340 L820 275 L920 360 L1040 235 L1150 325 L1260 265 L1360 350 L1440 295 L1440 900 L0 900 Z" fill="url(#far-grad)" opacity="0.55"/>
-    <path d="M280 285 L312 332 L248 332 Z" fill="#dedad0" opacity="0.45"/>
-    <path d="M620 255 L654 303 L586 303 Z" fill="#dedad0" opacity="0.38"/>
-    <path d="M1040 235 L1078 286 L1002 286 Z" fill="#dedad0" opacity="0.5"/>
-    <path d="M0 625 L100 468 L200 528 L340 395 L460 478 L560 415 L680 375 L780 448 L880 385 L1000 458 L1100 395 L1200 468 L1300 415 L1380 488 L1440 445 L1440 900 L0 900 Z" fill="url(#mid-grad)" opacity="0.85"/>
-    <path d="M340 395 L372 440 L308 440 Z" fill="#c8c4b8" opacity="0.22"/>
-    <path d="M680 375 L714 422 L646 422 Z" fill="#c8c4b8" opacity="0.18"/>
-    <path d="M0 755 L120 638 L260 702 L380 618 L520 682 L640 608 L760 672 L880 598 L1020 662 L1160 588 L1300 652 L1440 598 L1440 900 L0 900 Z" fill="url(#fore-grad)"/>
-    <g fill="#0f1409" opacity="0.85">
-      <polygon points="28,812 39,762 50,812"/><polygon points="52,822 65,770 78,822"/>
-      <polygon points="18,832 31,792 44,832"/><polygon points="78,816 90,772 102,816"/>
-      <polygon points="258,782 271,732 284,782"/><polygon points="278,792 292,742 306,792"/>
-      <polygon points="243,797 257,752 271,797"/>
-      <polygon points="578,762 593,707 608,762"/><polygon points="604,772 618,720 632,772"/>
-      <polygon points="558,777 573,730 588,777"/><polygon points="628,767 642,717 656,767"/>
-      <polygon points="1198,757 1212,702 1226,757"/><polygon points="1223,767 1237,714 1251,767"/>
-      <polygon points="1178,770 1193,722 1208,770"/>
-      <polygon points="1378,772 1391,724 1404,772"/><polygon points="1398,782 1412,732 1426,782"/>
-    </g>
-    <rect x="0" y="700" width="1440" height="200" fill="url(#fade-bot)"/>
-  </svg>
-</div>
+<canvas id="bg-canvas"></canvas>
 
 <nav id="main-nav">
-  <a href="#hero" class="nav-logo">GG.</a>
+  <a href="#hero" class="nav-logo">Gaurav Gupta</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
+    <li><a href="#projects">Research</a></li>
     <li><a href="#beyond">Beyond</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
-  <div class="elevation-tag">32.2432°N 77.1892°E · 14,009 ft — Bhrigu Lake</div>
-  <h1 class="hero-name">Gaurav<br><span>Gupta</span></h1>
-  <p class="hero-tagline">Mathematician. Researcher. Someone who thinks better above the treeline.</p>
+  <div class="hero-name-small">Gaurav Gupta · BSc Mathematics, Shiv Nadar University</div>
+  <div class="hero-topics">
+    <span class="hero-topic-line">Computational Epidemiology.</span>
+    <span class="hero-topic-line">Behavioural Dynamics.</span>
+    <span class="hero-topic-line">Network Control Theory.</span>
+  </div>
+  <div class="hero-rule"></div>
+  <p class="hero-sub">Modelling how people decide — and what happens when those decisions interact with brains and disease.</p>
+  <p class="hero-institution">Mathematics · Computational Neuroscience · Game Theory</p>
   <div class="hero-cta">
     <a href="#projects" class="btn btn-primary">View research</a>
     <a href="#contact" class="btn btn-outline">Get in touch</a>
   </div>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line-v"></div>
-  </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="fade-in">
-    <div class="section-label">01 — About me</div>
-    <h2 class="section-title">Mathematician by training,<br><em>trekker by calling</em></h2>
-    <div class="about-grid">
+    <div class="section-header">
+      <div class="section-label">§ 01</div>
+      <h2 class="section-title">About me</h2>
+    </div>
+    <div class="about-body">
       <div class="about-text">
-        <p>I'm Gaurav — a recent graduate from <strong>Shiv Nadar University</strong> with a <strong>BSc (Research) in Mathematics</strong>, specialising in Mathematical Finance. I work at the intersection of mathematical modelling, behavioural science, and computational neuroscience.</p>
-        <p>I'm drawn to problems where rigorous mathematics meets the messiness of human behaviour — whether that's how people make decisions during an epidemic, or how the brain's wiring relates to anxiety.</p>
-        <p>When I'm not buried in papers, I'm somewhere on a trail in Himachal Pradesh, usually above 10,000 feet, where the questions get quieter and the thinking gets clearer.</p>
-        <div class="trek-badges">
-          <div class="trek-badge"><div class="dot"></div> Himachal Pradesh</div>
-          <div class="trek-badge"><div class="dot"></div> Himalayas</div>
-          <div class="trek-badge"><div class="dot"></div> Parvati Valley</div>
-          <div class="trek-badge"><div class="dot"></div> Kullu</div>
-        </div>
+        <p>I'm Gaurav, a recent graduate from <strong>Shiv Nadar University</strong> with a <strong>BSc (Research) in Mathematics</strong>.</p>
+        <p>My research sits at the intersection of mathematical modelling and human behaviour — how people make decisions under uncertainty, and what happens when those decisions interact with large-scale dynamics like disease spread or brain activity.</p>
+        <p>I'm currently working on two projects: one coupling epidemiological dynamics with behavioural game theory, and another applying network control theory to brain connectomes to find objective correlates of trait anxiety.</p>
+        <p>Outside of research I read — philosophy, fiction, psychoanalytic theory — and spend time in the mountains, which I find useful for the same reason: they both require you to slow down and pay attention.</p>
       </div>
-      <div class="stat-grid">
-        <div class="stat-block">
-          <div class="stat-num">2</div>
-          <span class="stat-unit">research projects</span>
-          <div class="stat-desc">in epi & neuroscience</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-num">14k</div>
-          <span class="stat-unit">feet</span>
-          <div class="stat-desc">highest point reached</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-num">5</div>
-          <span class="stat-unit">treks completed</span>
-          <div class="stat-desc">across Himachal</div>
-        </div>
-        <div class="stat-block">
-          <div class="stat-num">∞</div>
-          <span class="stat-unit">questions</span>
-          <div class="stat-desc">the trail always continues</div>
-        </div>
+      <div class="aside-box">
+        <div class="aside-box-title">At a glance</div>
+        <div class="stat-pair"><div class="stat-num">2</div><div class="stat-desc">active research projects</div></div>
+        <div class="aside-divider"></div>
+        <div class="stat-pair"><div class="stat-num">14k ft</div><div class="stat-desc">highest point reached</div></div>
+        <div class="aside-divider"></div>
+        <div class="stat-pair"><div class="stat-num">5</div><div class="stat-desc">Himalayan treks</div></div>
+        <div class="aside-divider"></div>
+        <div class="stat-pair"><div class="stat-num">7</div><div class="stat-desc">books on current shelf</div></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
   <div class="fade-in">
-    <div class="section-label">02 — Skills</div>
-    <h2 class="section-title">Tools &amp; terrain</h2>
+    <div class="section-header">
+      <div class="section-label">§ 02</div>
+      <h2 class="section-title">Skills &amp; tools</h2>
+    </div>
     <div class="skills-grid">
       <div class="skill-cat">
         <div class="skill-cat-title">Mathematics</div>
         <div class="tags">
           <span class="tag">Game Theory</span><span class="tag">ODE Modelling</span>
-          <span class="tag">Behavioural Economics</span><span class="tag">Probability</span><span class="tag">Mathematical Finance</span>
+          <span class="tag">Behavioural Economics</span><span class="tag">Probability</span>
         </div>
       </div>
       <div class="skill-cat">
@@ -286,61 +336,67 @@
       <div class="skill-cat">
         <div class="skill-cat-title">Currently exploring</div>
         <div class="tags">
-          <span class="tag">Brain Connectomics</span><span class="tag">Machine Learning</span><span class="tag">Psychoanalytic Theory</span>
+          <span class="tag">Brain Connectomics</span><span class="tag">Machine Learning</span>
+          <span class="tag">Psychoanalytic Theory</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <div class="fade-in">
-    <div class="section-label">03 — Research</div>
-    <h2 class="section-title">Problems I've <em>climbed</em></h2>
+    <div class="section-header">
+      <div class="section-label">§ 03</div>
+      <h2 class="section-title">Research</h2>
+    </div>
     <div class="projects-list">
-
-      <div class="project-row">
-        <div class="proj-num">01</div>
-        <div>
-          <div class="proj-badge">Thesis · Epidemiology</div>
-          <div class="proj-title">SVITR Disease Model with Behavioural Dynamics</div>
-          <p class="proj-desc">
-            Built a coupled epidemiological-behavioural model where disease dynamics are shaped by individual decision-making. The key innovation: people don't perceive objective probabilities (like disease severity) at face value. Using the <strong style="color:var(--cream)">Prelec probability weighting function</strong>, we capture how optimism, skepticism, and information access distort perceived risk. Combined with <strong style="color:var(--cream)">hyperbolic discounting</strong> — which models how impatience affects decisions over time — the model computes perceived payoffs for each strategy (vaccination, antibiotics, or none). These payoffs then feed back into disease dynamics, making the model a genuine two-way system between behaviour and contagion.
-          </p>
-          <div class="proj-stack tags">
-            <span class="tag">Python</span><span class="tag">ODE Systems</span><span class="tag">Game Theory</span><span class="tag">Prelec Function</span><span class="tag">Hyperbolic Discounting</span>
-          </div>
+      <div class="project-card">
+        <div class="proj-meta">
+          <span class="proj-badge">Thesis · Epidemiology</span>
+          <span class="proj-status">Completed</span>
         </div>
-        <a href="https://github.com/ggaurav99" class="proj-link" target="_blank">GitHub ↗</a>
-      </div>
-
-      <div class="project-row">
-        <div class="proj-num">02</div>
-        <div>
-          <div class="proj-badge">Ongoing · Computational Neuroscience</div>
-          <div class="proj-title">Brain Controllability &amp; Trait Anxiety Correlates</div>
-          <p class="proj-desc">
-            The standard way to diagnose trait anxiety is the STAI — a pen-and-paper self-report test that depends entirely on the honesty of the patient. We're building an objective alternative. Using <strong style="color:var(--cream)">Network Control Theory</strong> applied to brain connectomes, we assess the controllability of different brain regions — essentially, how easily each region can steer the brain into different activity states. The goal: find controllability metrics that correlate with STAI scores, so that a clinician can run brain scans and compute a diagnosis without the patient needing to self-report at all.
-          </p>
+        <div class="proj-title">SVITR Disease Model with Behavioural Dynamics</div>
+        <p class="proj-desc">A coupled epidemiological-behavioural model where disease dynamics are shaped by individual decision-making. Using the <strong>Prelec probability weighting function</strong>, the model captures how optimism, scepticism, and information access distort perceived risk. Combined with <strong>hyperbolic discounting</strong> — which models how impatience affects decisions over time — the model computes perceived payoffs for each strategy (vaccination, antibiotics, or none). These payoffs feed back into disease dynamics, creating a genuine two-way system between behaviour and contagion.</p>
+        <div class="proj-footer">
           <div class="proj-stack tags">
-            <span class="tag">Python</span><span class="tag">Network Control Theory</span><span class="tag">Brain Connectomes</span><span class="tag">STAI</span><span class="tag">fMRI</span>
+            <span class="tag">Python</span><span class="tag">ODE Systems</span>
+            <span class="tag">Game Theory</span><span class="tag">Prelec Function</span>
+            <span class="tag">Hyperbolic Discounting</span>
           </div>
+          <a href="https://github.com/ggaurav99" class="proj-link" target="_blank">GitHub ↗</a>
         </div>
-        <a href="https://github.com/ggaurav99" class="proj-link" target="_blank">GitHub ↗</a>
       </div>
-
+      <div class="project-card">
+        <div class="proj-meta">
+          <span class="proj-badge">Computational Neuroscience</span>
+          <span class="proj-status">Ongoing</span>
+        </div>
+        <div class="proj-title">Brain Controllability &amp; Trait Anxiety Correlates</div>
+        <p class="proj-desc">The standard way to diagnose trait anxiety is the STAI — a self-report questionnaire dependent entirely on patient honesty. This project builds an objective alternative. Using <strong>Network Control Theory</strong> applied to brain connectomes, we assess the controllability of different brain regions: how easily each region can steer the brain into different activity states. The goal is to find controllability metrics that correlate with STAI scores, so a clinician can compute a diagnosis from brain scans without requiring self-report.</p>
+        <div class="proj-footer">
+          <div class="proj-stack tags">
+            <span class="tag">Python</span><span class="tag">Network Control Theory</span>
+            <span class="tag">Brain Connectomes</span><span class="tag">STAI</span><span class="tag">fMRI</span>
+          </div>
+          <a href="https://github.com/ggaurav99" class="proj-link" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- BEYOND -->
 <section id="beyond">
   <div class="fade-in">
-    <div class="section-label">04 — Beyond research</div>
-    <h2 class="section-title">What I read &amp;<br><em>where I wander</em></h2>
+    <div class="section-header">
+      <div class="section-label">§ 04</div>
+      <h2 class="section-title">Beyond research</h2>
+    </div>
     <div class="beyond-grid">
-
       <div class="beyond-card">
-        <div class="beyond-card-title">📚 Bookshelf</div>
+        <div class="beyond-card-title">Current bookshelf</div>
         <div class="book-list">
           <div class="book-item"><div class="book-title">The Story of Philosophy</div><div class="book-author">Will Durant</div></div>
           <div class="book-item"><div class="book-title">The Plague</div><div class="book-author">Albert Camus</div></div>
@@ -351,70 +407,43 @@
           <div class="book-item"><div class="book-title">A Critical Survey of Indian Philosophy</div><div class="book-author">C.D. Sharma</div></div>
         </div>
       </div>
-
       <div class="beyond-card">
-        <div class="beyond-card-title">🏔 Trek log</div>
+        <div class="beyond-card-title">Trek log</div>
         <div class="trek-log">
-          <div class="trek-entry">
-            <div class="trek-alt">14,010 ft</div>
-            <div><div class="trek-name">Hampta Pass</div><div class="trek-loc">Kullu, Himachal Pradesh</div></div>
-          </div>
-          <div class="trek-entry">
-            <div class="trek-alt">14,009 ft</div>
-            <div><div class="trek-name">Bhrigu Lake</div><div class="trek-loc">Manali, Himachal Pradesh</div></div>
-          </div>
-          <div class="trek-entry">
-            <div class="trek-alt">13,850 ft</div>
-            <div><div class="trek-name">Sar Pass</div><div class="trek-loc">Parvati Valley, Himachal Pradesh</div></div>
-          </div>
-          <div class="trek-entry">
-            <div class="trek-alt">9,711 ft</div>
-            <div><div class="trek-name">Kheerganga</div><div class="trek-loc">Parvati Valley, Himachal Pradesh</div></div>
-          </div>
-          <div class="trek-entry">
-            <div class="trek-alt">9,430 ft</div>
-            <div><div class="trek-name">Triund</div><div class="trek-loc">Dharamshala, Himachal Pradesh</div></div>
-          </div>
+          <div class="trek-entry"><div class="trek-alt">14,010 ft</div><div><div class="trek-name">Hampta Pass</div><div class="trek-loc">Kullu, Himachal Pradesh</div></div></div>
+          <div class="trek-entry"><div class="trek-alt">14,009 ft</div><div><div class="trek-name">Bhrigu Lake</div><div class="trek-loc">Manali, Himachal Pradesh</div></div></div>
+          <div class="trek-entry"><div class="trek-alt">13,850 ft</div><div><div class="trek-name">Sar Pass</div><div class="trek-loc">Parvati Valley</div></div></div>
+          <div class="trek-entry"><div class="trek-alt">9,711 ft</div><div><div class="trek-name">Kheerganga</div><div class="trek-loc">Parvati Valley</div></div></div>
+          <div class="trek-entry"><div class="trek-alt">9,430 ft</div><div><div class="trek-name">Triund</div><div class="trek-loc">Dharamshala</div></div></div>
         </div>
       </div>
-
-      <div class="beyond-card" style="grid-column:1/-1;">
-        <div class="beyond-card-title">💭 On philosophy &amp; expanding horizons</div>
+      <div class="beyond-card beyond-card-wide">
+        <div class="beyond-card-title">On philosophy &amp; reading</div>
         <p class="phil-quote">"Books allow me to inhabit minds shaped by completely different times, places, and circumstances — and that is the most reliable way I know to think beyond myself."</p>
-        <p class="phil-note">
-          My relationship with philosophy began not in a classroom but through a personal inflection point — an experience that forced me to question whether what I believed was genuinely mine, or simply the product of my surroundings: family, peers, school, the particular corner of society I grew up in. It was, in retrospect, an encounter with survivorship bias — and I didn't survive it, metaphorically speaking.
-        </p>
+        <p class="phil-note">My relationship with philosophy began not in a classroom but through a personal inflection point — an experience that forced me to question whether what I believed was genuinely mine, or simply the product of my surroundings: family, peers, school, the particular corner of society I grew up in. It was, in retrospect, an encounter with survivorship bias.</p>
         <br>
-        <p class="phil-note">
-          That sent me to <em>Sophie's World</em>, then Will Durant, then a critical survey of Indian philosophy. What struck me was simple: people who lived centuries ago, in completely different parts of the world, with no shared cultural context — thought radically differently. If they could arrive at such different conclusions, how certain could I be about my own? Books became the tool for borrowing 60–70 years of someone else's thinking in 300 pages. That still strikes me as an extraordinary deal.
-        </p>
+        <p class="phil-note">That sent me to <em>Sophie's World</em>, then Will Durant, then a critical survey of Indian philosophy. What struck me was simple: people who lived centuries ago, in completely different parts of the world, with no shared cultural context — thought radically differently. If they could arrive at such different conclusions, how certain could I be about my own? Books became the tool for borrowing 60–70 years of someone else's thinking in 300 pages. That still strikes me as an extraordinary deal.</p>
         <br>
-        <p class="phil-note">
-          Today my interests span Stoicism, psychoanalytic theory (Freud, Lacan), the philosophy of mind, and the question of what it means to think freely in a world that is constantly trying to think for you. The mountains help too — there's something about altitude that strips away noise and forces clarity.
-        </p>
+        <p class="phil-note">Today my interests span Stoicism, psychoanalytic theory (Freud, Lacan), the philosophy of mind, and the question of what it means to think freely in a world that is constantly trying to think for you.</p>
       </div>
-
     </div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="fade-in">
-    <div class="section-label">05 — Contact</div>
-    <h2 class="section-title">Let's find the<br><em>trailhead together</em></h2>
+    <div class="section-header">
+      <div class="section-label">§ 05</div>
+      <h2 class="section-title">Get in touch</h2>
+    </div>
     <div class="contact-grid">
       <div class="contact-info">
-        <p>Whether it's research collaboration, an interesting problem, a book recommendation, or a trek you think I should do — reach out. I read everything.</p>
+        <p>Whether it's a research collaboration, an interesting problem, a book recommendation, or something else entirely — reach out. I read everything.</p>
         <div class="socials">
-          <a href="https://github.com/ggaurav99" class="social-link" target="_blank">
-            <span class="social-icon">gh://</span><span>github.com/ggaurav99</span>
-          </a>
-          <a href="https://www.linkedin.com/in/gaurav-gupta-a566aa278/" class="social-link" target="_blank">
-            <span class="social-icon">li://</span><span>linkedin.com/in/gaurav-gupta</span>
-          </a>
-          <a href="mailto:gg629@snu.edu.in" class="social-link">
-            <span class="social-icon">✉</span><span>gg629@snu.edu.in</span>
-          </a>
+          <a href="https://github.com/ggaurav99" class="social-link" target="_blank"><span class="social-icon">gh://</span><span>github.com/ggaurav99</span></a>
+          <a href="https://www.linkedin.com/in/gaurav-gupta-a566aa278/" class="social-link" target="_blank"><span class="social-icon">li://</span><span>linkedin.com/in/gaurav-gupta</span></a>
+          <a href="mailto:gg629@snu.edu.in" class="social-link"><span class="social-icon">✉</span><span>gg629@snu.edu.in</span></a>
         </div>
       </div>
       <form class="form" onsubmit="handleSubmit(event)">
@@ -425,33 +454,260 @@
         <div class="form-group"><label for="fsubject">Subject</label><input type="text" id="fsubject" placeholder="What's this about?" /></div>
         <div class="form-group"><label for="fmessage">Message</label><textarea id="fmessage" placeholder="Tell me what's on your mind..." required></textarea></div>
         <button type="submit" class="btn btn-primary" id="submit-btn" style="align-self:flex-start">Send message →</button>
-        <p id="form-status" style="font-size:0.82rem;color:var(--moss2);display:none;font-family:'DM Mono',monospace;">Message received. I'll be in touch.</p>
+        <p id="form-status" style="font-size:0.78rem;color:var(--violet2);display:none;font-family:'DM Mono',monospace;letter-spacing:0.06em;">Message received. I'll be in touch.</p>
       </form>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Gaurav Gupta · BSc Mathematics, Shiv Nadar University</p>
-  <span>32.2432°N · 77.1892°E · Bhrigu Lake</span>
+  <span>Gaurav Gupta · BSc Mathematics, Shiv Nadar University</span>
+  <span>gg629@snu.edu.in</span>
 </footer>
 
 <script>
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 80);
-    document.getElementById('hero-bg').style.transform = `translateY(${window.scrollY * 0.3}px)`;
-  });
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    btn.textContent = 'Sending...'; btn.disabled = true;
-    setTimeout(() => { btn.style.display='none'; document.getElementById('form-status').style.display='block'; }, 1000);
+// NAV
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+// FADE IN
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// FORM
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  setTimeout(() => { btn.style.display='none'; document.getElementById('form-status').style.display='block'; }, 1000);
+}
+
+// ── BRAIN CONNECTOME + DRIFT PARTICLES ──
+(function () {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
+  resize();
+  window.addEventListener('resize', () => { resize(); init(); });
+
+  // ── Colour helpers ──
+  const VC  = (a) => `rgba(124,111,205,${a})`;   // violet — axons / edges
+  const VC2 = (a) => `rgba(169,159,224,${a})`;   // lighter violet — soma glow
+  const WC  = (a) => `rgba(220,215,240,${a})`;   // near-white — drift particles
+
+  // ── Region seeds (rough lobes of a brain, normalised 0-1) ──
+  // These bias where nodes cluster so the network looks anatomical
+  const REGIONS = [
+    { cx: 0.22, cy: 0.38, spread: 0.13 }, // left frontal
+    { cx: 0.78, cy: 0.38, spread: 0.13 }, // right frontal
+    { cx: 0.20, cy: 0.62, spread: 0.11 }, // left parietal
+    { cx: 0.80, cy: 0.62, spread: 0.11 }, // right parietal
+    { cx: 0.20, cy: 0.80, spread: 0.09 }, // left occipital
+    { cx: 0.80, cy: 0.80, spread: 0.09 }, // right occipital
+    { cx: 0.35, cy: 0.55, spread: 0.08 }, // left temporal
+    { cx: 0.65, cy: 0.55, spread: 0.08 }, // right temporal
+    { cx: 0.50, cy: 0.45, spread: 0.07 }, // corpus callosum / midline
+    { cx: 0.50, cy: 0.70, spread: 0.07 }, // brainstem
+  ];
+
+  const NODE_COUNT  = 80;  // dense — real connectomes have ~80-100 ROIs
+  const CONN_DIST   = 180;  // max edge length
+  const FIRE_PROB   = 0.0006; // per frame chance a resting node fires
+
+  let nodes = [], hubIndices = [];
+
+  function gaussian() {
+    // Box-Muller for normally-distributed offsets
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+  }
+
+  function init() {
+    nodes = [];
+    for (let i = 0; i < NODE_COUNT; i++) {
+      const reg = REGIONS[i % REGIONS.length];
+      const x   = (reg.cx + gaussian() * reg.spread) * W;
+      const y   = (reg.cy + gaussian() * reg.spread) * H;
+      const hub = Math.random() < 0.12; // ~12% are hub nodes (larger, brighter)
+      nodes.push({
+        x: Math.max(20, Math.min(W - 20, x)),
+        y: Math.max(20, Math.min(H - 20, y)),
+        r: hub ? 3.2 + Math.random() * 1.6 : 1.4 + Math.random() * 1.4,
+        hub,
+        // very slow drift so nodes aren't completely static
+        vx: (Math.random() - 0.5) * 0.06,
+        vy: (Math.random() - 0.5) * 0.06,
+        // idle pulse (gentle brightness oscillation)
+        phase:      Math.random() * Math.PI * 2,
+        phaseSpeed: 0.006 + Math.random() * 0.009,
+        // firing state
+        firing:     false,
+        fireAlpha:  0,
+        fireDecay:  0.018 + Math.random() * 0.014,
+        // propagation target — which neighbours will fire next
+        propagateTo: [],
+        propDelay:   0,
+      });
+      if (hub) hubIndices.push(i);
+    }
+
+    // Pre-compute adjacency for propagation (edges within CONN_DIST)
+    for (let i = 0; i < nodes.length; i++) {
+      nodes[i].propagateTo = [];
+      for (let j = 0; j < nodes.length; j++) {
+        if (i === j) continue;
+        const dx = nodes[j].x - nodes[i].x, dy = nodes[j].y - nodes[i].y;
+        if (Math.sqrt(dx*dx + dy*dy) < CONN_DIST) {
+          nodes[i].propagateTo.push(j);
+        }
+      }
+    }
+  }
+  init();
+
+  // Trigger a fire wave from node i
+  function fire(i) {
+    const n = nodes[i];
+    if (n.firing && n.fireAlpha > 0.5) return; // already firing strongly
+    n.firing    = true;
+    n.fireAlpha = 1.0;
+    // randomly propagate to 1-3 neighbours after a short delay
+    const count = 1 + Math.floor(Math.random() * 3);
+    const targets = n.propagateTo.slice().sort(() => Math.random() - 0.5).slice(0, count);
+    targets.forEach(j => {
+      setTimeout(() => { if (nodes[j]) fire(j); }, 60 + Math.random() * 180);
+    });
+  }
+
+  // ── Drift particles ──
+  const PART_COUNT = 80;
+  let parts = [];
+
+  function spawnPart(random) {
+    return {
+      x:     random ? Math.random() * W : (Math.random() < 0.5 ? -4 : W + 4),
+      y:     random ? Math.random() * H : Math.random() * H,
+      r:     0.5 + Math.random() * 0.9,
+      vx:    (Math.random() - 0.5) * 0.18,
+      vy:    -0.04 - Math.random() * 0.1,
+      alpha: 0.06 + Math.random() * 0.16,
+      life:  1.0,
+      decay: 0.0006 + Math.random() * 0.0008,
+    };
+  }
+
+  function initParts() {
+    parts = [];
+    for (let i = 0; i < PART_COUNT; i++) parts.push(spawnPart(true));
+  }
+  initParts();
+
+  function drawFrame() {
+    ctx.clearRect(0, 0, W, H);
+
+    // ── Edges ──
+    for (let i = 0; i < nodes.length; i++) {
+      const ni = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const nj = nodes[j];
+        const dx = nj.x - ni.x, dy = nj.y - ni.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist > CONN_DIST) continue;
+
+        const proximity  = 1 - dist / CONN_DIST;
+        const fireBoost  = (ni.fireAlpha + nj.fireAlpha) * 0.4;
+        const edgeAlpha  = Math.min(proximity * 0.22 + fireBoost * 0.5, 0.75);
+
+        // hub-to-hub edges are slightly brighter (white matter tracts)
+        const isWhiteMatter = ni.hub && nj.hub;
+        ctx.beginPath();
+        ctx.moveTo(ni.x, ni.y);
+        ctx.lineTo(nj.x, nj.y);
+        ctx.strokeStyle = isWhiteMatter
+          ? `rgba(190,180,240,${edgeAlpha})`
+          : VC(edgeAlpha * 0.85);
+        ctx.lineWidth = isWhiteMatter ? 0.9 : 0.5;
+        ctx.stroke();
+      }
+    }
+
+    // ── Nodes ──
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+
+      // idle pulse
+      n.phase += n.phaseSpeed;
+      const pulse = (Math.sin(n.phase) * 0.5 + 0.5); // 0-1
+
+      // spontaneous firing
+      if (!n.firing && Math.random() < FIRE_PROB) fire(i);
+
+      // decay fire
+      if (n.firing) {
+        n.fireAlpha -= n.fireDecay;
+        if (n.fireAlpha <= 0) { n.fireAlpha = 0; n.firing = false; }
+      }
+
+      const baseAlpha  = 0.3 + pulse * 0.25;
+      const totalAlpha = Math.min(baseAlpha + n.fireAlpha * 0.65, 1.0);
+      const radius     = n.r + (n.firing ? n.fireAlpha * (n.hub ? 5 : 3) : 0);
+
+      // glow halo when firing
+      if (n.firing && n.fireAlpha > 0.05) {
+        const haloR = radius * (n.hub ? 6 : 4.5);
+        const grd   = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, haloR);
+        grd.addColorStop(0, VC2(n.fireAlpha * 0.5));
+        grd.addColorStop(1, VC2(0));
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, haloR, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+      }
+
+      // soma (cell body)
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = VC2(totalAlpha);
+      ctx.fill();
+
+      // drift
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < -30) n.x = W + 30;
+      if (n.x > W+30) n.x = -30;
+      if (n.y < -30) n.y = H + 30;
+      if (n.y > H+30) n.y = -30;
+    }
+
+    // ── Drift particles ──
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const p = parts[i];
+      p.x += p.vx; p.y += p.vy;
+      p.life -= p.decay;
+      if (p.life <= 0 || p.y < -10) { parts[i] = spawnPart(false); continue; }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = WC(p.alpha * p.life);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(drawFrame);
+  }
+
+  drawFrame();
+
+  // Seed a few initial fires to show life immediately on load
+  setTimeout(() => { hubIndices.slice(0,3).forEach(i => fire(i)); }, 400);
+})();
 </script>
 </body>
 </html>
