@@ -68,7 +68,7 @@
       min-height: 100vh;
       display: flex; flex-direction: column; justify-content: center;
       padding: 8rem 3.5rem 6rem;
-      max-width: 1400px;
+      max-width: 140px;
     }
     .hero-name-small {
       font-family: 'DM Mono', monospace;
@@ -558,23 +558,34 @@ let brain;
 loader.load(
     "models/human_brain.glb",
 
-    function(gltf){
+    (gltf) => {
 
         brain = gltf.scene;
 
-        brain.scale.set(0.05,0.05,0.05);
+        const box = new THREE.Box3().setFromObject(brain);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
 
-        brain.rotation.y = Math.PI/8;
+        brain.position.sub(center);
+
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 3 / maxDim;
+        brain.scale.setScalar(scale);
 
         scene.add(brain);
+
+        camera.lookAt(0, 0, 0);
+
+        console.log("Brain loaded");
 
     },
 
     undefined,
 
-    function(err){
-        console.error(err);
+    (error) => {
+        console.error("GLB error:", error);
     }
+
 );
 
 function animate(){
