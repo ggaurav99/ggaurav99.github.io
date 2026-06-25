@@ -512,11 +512,14 @@ window.addEventListener("resize", resizeCanvas);
 
 const particles = [];
 
-for (let i = 0; i < 120; i++) {
-    particles.push({
-        x: (Math.random() - 0.5) * 4,
-        y: (Math.random() - 0.5) * 4
-    });
+for(let x=-2.6; x<=2.6; x+=0.28){
+
+    for(let y=-2.6; y<=2.6; y+=0.28){
+
+        particles.push({x,y});
+
+    }
+
 }
 
 let time = 0;
@@ -547,27 +550,36 @@ function draw() {
 
     particles.forEach(p => {
 
-        ctx.beginPath();
-
         let x = p.x;
-        let y = p.y;
+let y = p.y;
 
-        for (let i = 0; i < 220; i++) {
+for(let i=0;i<220;i++){
 
-            const px = canvas.width/2 + x*70;
-            const py = canvas.height/2 - y*70;
+    const px1 = canvas.width/2 + x*70;
+    const py1 = canvas.height/2 - y*70;
 
-            if(i===0) ctx.moveTo(px,py);
-            else ctx.lineTo(px,py);
+    const v = field(x,y);
 
-            const v = field(x,y);
+    const nx = x + v.dx*0.015;
+    const ny = y + v.dy*0.015;
 
-            x += v.dx*0.015;
-            y += v.dy*0.015;
-        }
+    const px2 = canvas.width/2 + nx*70;
+    const py2 = canvas.height/2 - ny*70;
 
-        ctx.stroke();
+    const alpha = i/220;
 
+    ctx.strokeStyle =
+        `rgba(169,159,224,${0.08 + 0.55*alpha})`;
+
+    ctx.beginPath();
+    ctx.moveTo(px1,py1);
+    ctx.lineTo(px2,py2);
+    ctx.stroke();
+
+    x = nx;
+    y = ny;
+
+}
       
 
     });
