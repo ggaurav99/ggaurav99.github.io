@@ -543,46 +543,49 @@ function field(x, y) {
 
 function draw() {
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(10,11,16,0.05)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
     time += 0.01;
     ctx.strokeStyle = "rgba(169,159,224,0.58)";
     ctx.lineWidth = 1.8;
 
     particles.forEach(p => {
 
-        let x = p.x;
-let y = p.y;
+    const oldx = p.x;
+    const oldy = p.y;
 
-for(let i=0;i<220;i++){
+    const v = field(p.x, p.y);
 
-    const px1 = canvas.width/2 + x*70;
-    const py1 = canvas.height/2 - y*70;
+    p.x += v.dx * 0.012;
+    p.y += v.dy * 0.012;
 
-    const v = field(x,y);
+    if (
+        p.x > 3 || p.x < -3 ||
+        p.y > 3 || p.y < -3
+    ) {
+        p.x = (Math.random()-0.5)*5.5;
+        p.y = (Math.random()-0.5)*5.5;
+        return;
+    }
 
-    const nx = x + v.dx*0.015;
-    const ny = y + v.dy*0.015;
-
-    const px2 = canvas.width/2 + nx*70;
-    const py2 = canvas.height/2 - ny*70;
-
-    const alpha = i/220;
-
-    ctx.strokeStyle =
-        `rgba(169,159,224,${0.08 + 0.55*alpha})`;
+    ctx.strokeStyle = "rgba(169,159,224,0.35)";
+    ctx.lineWidth = 1.4;
 
     ctx.beginPath();
-    ctx.moveTo(px1,py1);
-    ctx.lineTo(px2,py2);
+
+    ctx.moveTo(
+        canvas.width/2 + oldx*70,
+        canvas.height/2 - oldy*70
+    );
+
+    ctx.lineTo(
+        canvas.width/2 + p.x*70,
+        canvas.height/2 - p.y*70
+    );
+
     ctx.stroke();
 
-    x = nx;
-    y = ny;
-
-}
-      
-
-    });
+});
 
     requestAnimationFrame(draw);
 }
