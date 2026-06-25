@@ -34,9 +34,6 @@
       overflow-x: hidden;
     }
 
-    #bg-canvas {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    }
 
     /* NAV */
     nav {
@@ -71,7 +68,7 @@
       min-height: 100vh;
       display: flex; flex-direction: column; justify-content: center;
       padding: 8rem 3.5rem 6rem;
-      max-width: 900px;
+      max-width: 1400px;
     }
     .hero-name-small {
       font-family: 'DM Mono', monospace;
@@ -243,24 +240,39 @@
       .fade-in, .hero-topic-line { transition: none; animation: none; opacity: 1; transform: none; }
     }
     #brain-container{
-  position: fixed;
-  right: 3vw;
-  top: 50%;
-  width: 380px;
-  height: 380px;
-  transform: translateY(-50%);
-  z-index: 1;
-  opacity: 0.7;
+    position:absolute;
+
+    right:60px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:480px;
+    height:480px;
+
+    z-index:1;
+
+    opacity:0.85;
+
+    pointer-events:auto;
 }
 
 @media(max-width:900px){
-  #brain-container{
-    width:240px;
-    height:240px;
-    opacity:0.25;
-  }
+
+    #brain-container{
+        display:none;
+    }
+
 }
   </style>
+  <script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -279,15 +291,15 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-name-small">Gaurav Gupta · BSc Mathematics, Shiv Nadar University</div>
+  <div class="hero-name-small">DRDO-INMAS · BSc Mathematics · Shiv Nadar University</div>
   <div class="hero-topics">
-    <span class="hero-topic-line">Computational Epidemiology.</span>
-    <span class="hero-topic-line">Behavioural Dynamics.</span>
-    <span class="hero-topic-line">Network Control Theory.</span>
+    <span class="hero-topic-line">Nonlinear Dynamics.</span>
+    <span class="hero-topic-line">Optimal Control Theory.</span>
+    <span class="hero-topic-line">Computational Neuroscience.</span>
   </div>
   <div class="hero-rule"></div>
-  <p class="hero-sub">Modelling how people decide — and what happens when those decisions interact with brains and disease.</p>
-  <p class="hero-institution">Mathematics · Computational Neuroscience · Game Theory</p>
+  <p class="hero-sub">The highest activity a human being can attain is learning for understanding, because to understand is to be free. - Baruch Spinoza </p>
+  <p class="hero-institution">Applied Mathematics · Control Theory · Philosophy · Music</p>
   <div class="hero-cta">
     <a href="#projects" class="btn btn-primary">View research</a>
     <a href="#contact" class="btn btn-outline">Get in touch</a>
@@ -304,9 +316,9 @@
     <div class="about-body">
       <div class="about-text">
         <p>I'm Gaurav, a recent graduate from <strong>Shiv Nadar University</strong> with a <strong>BSc (Research) in Mathematics</strong>.</p>
-        <p>My research sits at the intersection of mathematical modelling and human behaviour — how people make decisions under uncertainty, and what happens when those decisions interact with large-scale dynamics like disease spread or brain activity.</p>
-        <p>I'm currently working on two projects: one coupling epidemiological dynamics with behavioural game theory, and another applying network control theory to brain connectomes to find objective correlates of trait anxiety.</p>
-        <p>Outside of research I read — philosophy, fiction, psychoanalytic theory — and spend time in the mountains, which I find useful for the same reason: they both require you to slow down and pay attention.</p>
+        <p>My current research sits at the intersection of mathematical modelling and human behaviour — how people make decisions under uncertainty, and what happens when those decisions interact with large-scale dynamics like disease spread or brain activity.</p>
+        <p>I'm currently working on two projects: one coupling epidemiological dynamics with behavioural game theory and another applying network control theory to structural brain connectomes to find objective correlates of trait anxiety.</p>
+        <p>Outside of academics I like to read — philosophy, fiction, psychoanalytic theory and whenever I get time I go for a hike in the Himalayas !</p>
       </div>
       <div class="aside-box">
         <div class="aside-box-title">At a glance</div>
@@ -333,29 +345,31 @@
       <div class="skill-cat">
         <div class="skill-cat-title">Mathematics</div>
         <div class="tags">
-          <span class="tag">Game Theory</span><span class="tag">ODE Modelling</span>
-          <span class="tag">Behavioural Economics</span><span class="tag">Probability</span>
+          <span class="tag">Linear Systems and Control</span><span class="tag">ODE/PDE Modelling</span>
+          <span class="tag">Nonlinear Dynamical Systems</span>
+          <span class="tag">Game Theory</span><span class="tag">Bifurcation Theory</span>
         </div>
       </div>
       <div class="skill-cat">
-        <div class="skill-cat-title">Programming</div>
+        <div class="skill-cat-title">Python Libraries</div>
         <div class="tags">
-          <span class="tag">Python</span><span class="tag">MATLAB</span>
-          <span class="tag">R</span><span class="tag">NumPy</span><span class="tag">SciPy</span>
+          <span class="tag">NiBabel</span><span class="tag">Nilearn</span>
+          <span class="tag">DIPY</span><span class="tag">NumPy</span><span class="tag">SciPy</span>
+          <span class="tag">PyRates</span><span class="tag">PyCoBi</span><span class="tag">Pandas</span>
         </div>
       </div>
       <div class="skill-cat">
         <div class="skill-cat-title">Research</div>
         <div class="tags">
           <span class="tag">Epidemiological Modelling</span><span class="tag">Network Control Theory</span>
-          <span class="tag">Computational Neuroscience</span><span class="tag">LaTeX</span>
+          <span class="tag">Computational Neuroscience</span><span class="tag">Bifurcation Theory</span>
         </div>
       </div>
       <div class="skill-cat">
         <div class="skill-cat-title">Currently exploring</div>
         <div class="tags">
-          <span class="tag">Brain Connectomics</span><span class="tag">Machine Learning</span>
-          <span class="tag">Psychoanalytic Theory</span>
+          <span class="tag">Robust Optimal Control</span><span class="tag">Reinforcement Learning</span>
+          <span class="tag">PDE constrained optimization</span>
         </div>
       </div>
     </div>
@@ -373,15 +387,15 @@
       <div class="project-card">
         <div class="proj-meta">
           <span class="proj-badge">Thesis · Epidemiology</span>
-          <span class="proj-status">Completed</span>
+          <span class="proj-status">Almost Completed</span>
         </div>
         <div class="proj-title">SVITR Disease Model with Behavioural Dynamics</div>
-        <p class="proj-desc">A coupled epidemiological-behavioural model where disease dynamics are shaped by individual decision-making. Using the <strong>Prelec probability weighting function</strong>, the model captures how optimism, scepticism, and information access distort perceived risk. Combined with <strong>hyperbolic discounting</strong> — which models how impatience affects decisions over time — the model computes perceived payoffs for each strategy (vaccination, antibiotics, or none). These payoffs feed back into disease dynamics, creating a genuine two-way system between behaviour and contagion.</p>
+        <p class="proj-desc">A coupled epidemiological-behavioural model where disease dynamics are shaped by individual decision-making and vice-versa . Using the <strong>Prelec probability weighting function</strong>, the model captures how optimism, scepticism, and information access distort perceived risk. Combined with <strong>hyperbolic discounting</strong> — which models how impatience affects decisions over time — the model computes perceived payoffs for each strategy (vaccination, antibiotics, or none). These payoffs feed back into disease dynamics, creating a genuine two-way system between behaviour and contagion.</p>
         <div class="proj-footer">
           <div class="proj-stack tags">
-            <span class="tag">Python</span><span class="tag">ODE Systems</span>
-            <span class="tag">Game Theory</span><span class="tag">Prelec Function</span>
-            <span class="tag">Hyperbolic Discounting</span>
+            <span class="tag">PyRates</span><span class="tag">ODE Systems</span>
+            <span class="tag">Game Theory</span><span class="tag">PyCoBi</span>
+            <span class="tag">AUTO07p</span>
           </div>
           <a href="https://github.com/ggaurav99" class="proj-link" target="_blank">GitHub ↗</a>
         </div>
@@ -392,11 +406,11 @@
           <span class="proj-status">Ongoing</span>
         </div>
         <div class="proj-title">Brain Controllability &amp; Trait Anxiety Correlates</div>
-        <p class="proj-desc">The standard way to diagnose trait anxiety is the STAI — a self-report questionnaire dependent entirely on patient honesty. This project builds an objective alternative. Using <strong>Network Control Theory</strong> applied to brain connectomes, we assess the controllability of different brain regions: how easily each region can steer the brain into different activity states. The goal is to find controllability metrics that correlate with STAI scores, so a clinician can compute a diagnosis from brain scans without requiring self-report.</p>
+        <p class="proj-desc">The standard way to diagnose trait anxiety is the STAI — a self-report questionnaire dependent entirely on patient honesty. This research tries to find an objective alternative. Using <strong>Network Control Theory</strong> applied to brain connectomes, we assess the controllability of different brain regions: how easily each region can steer the brain into different activity states. The goal is to find controllability metrics that correlate with STAI scores, so a clinician can compute a diagnosis from brain scans without requiring self-report.</p>
         <div class="proj-footer">
           <div class="proj-stack tags">
-            <span class="tag">Python</span><span class="tag">Network Control Theory</span>
-            <span class="tag">Brain Connectomes</span><span class="tag">STAI</span><span class="tag">fMRI</span>
+            <span class="tag">NiBabel</span><span class="tag">Network Control Theory</span>
+            <span class="tag">Brain Imaging</span><span class="tag">Nilearn</span><span class="tag">Tractography</span>
           </div>
           <a href="https://github.com/ggaurav99" class="proj-link" target="_blank">GitHub ↗</a>
         </div>
@@ -502,230 +516,97 @@ function handleSubmit(e) {
   btn.textContent = 'Sending...'; btn.disabled = true;
   setTimeout(() => { btn.style.display='none'; document.getElementById('form-status').style.display='block'; }, 1000);
 }
+</script>
 
-// ── BRAIN CONNECTOME + DRIFT PARTICLES ──
-(function () {
-  const canvas = document.getElementById('bg-canvas');
-  const ctx    = canvas.getContext('2d');
-  let W, H;
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', () => { resize(); init(); });
+const container = document.getElementById("brain-container");
 
-  // ── Colour helpers ──
-  const VC  = (a) => `rgba(124,111,205,${a})`;   // violet — axons / edges
-  const VC2 = (a) => `rgba(169,159,224,${a})`;   // lighter violet — soma glow
-  const WC  = (a) => `rgba(220,215,240,${a})`;   // near-white — drift particles
+const scene = new THREE.Scene();
 
-  // ── Region seeds (rough lobes of a brain, normalised 0-1) ──
-  // These bias where nodes cluster so the network looks anatomical
-  const REGIONS = [
-    { cx: 0.22, cy: 0.38, spread: 0.13 }, // left frontal
-    { cx: 0.78, cy: 0.38, spread: 0.13 }, // right frontal
-    { cx: 0.20, cy: 0.62, spread: 0.11 }, // left parietal
-    { cx: 0.80, cy: 0.62, spread: 0.11 }, // right parietal
-    { cx: 0.20, cy: 0.80, spread: 0.09 }, // left occipital
-    { cx: 0.80, cy: 0.80, spread: 0.09 }, // right occipital
-    { cx: 0.35, cy: 0.55, spread: 0.08 }, // left temporal
-    { cx: 0.65, cy: 0.55, spread: 0.08 }, // right temporal
-    { cx: 0.50, cy: 0.45, spread: 0.07 }, // corpus callosum / midline
-    { cx: 0.50, cy: 0.70, spread: 0.07 }, // brainstem
-  ];
+const camera = new THREE.PerspectiveCamera(
+    35,
+    container.clientWidth / container.clientHeight,
+    0.1,
+    100
+);
 
-  const NODE_COUNT  = 80;  // dense — real connectomes have ~80-100 ROIs
-  const CONN_DIST   = 180;  // max edge length
-  const FIRE_PROB   = 0.0006; // per frame chance a resting node fires
+camera.position.set(0, 0, 5);
 
-  let nodes = [], hubIndices = [];
+const renderer = new THREE.WebGLRenderer({
+    alpha: true,
+    antialias: true
+});
 
-  function gaussian() {
-    // Box-Muller for normally-distributed offsets
-    let u = 0, v = 0;
-    while (u === 0) u = Math.random();
-    while (v === 0) v = Math.random();
-    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-  }
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(container.clientWidth, container.clientHeight);
+container.appendChild(renderer.domElement);
 
-  function init() {
-    nodes = [];
-    for (let i = 0; i < NODE_COUNT; i++) {
-      const reg = REGIONS[i % REGIONS.length];
-      const x   = (reg.cx + gaussian() * reg.spread) * W;
-      const y   = (reg.cy + gaussian() * reg.spread) * H;
-      const hub = Math.random() < 0.12; // ~12% are hub nodes (larger, brighter)
-      nodes.push({
-        x: Math.max(20, Math.min(W - 20, x)),
-        y: Math.max(20, Math.min(H - 20, y)),
-        r: hub ? 3.2 + Math.random() * 1.6 : 1.4 + Math.random() * 1.4,
-        hub,
-        // very slow drift so nodes aren't completely static
-        vx: (Math.random() - 0.5) * 0.06,
-        vy: (Math.random() - 0.5) * 0.06,
-        // idle pulse (gentle brightness oscillation)
-        phase:      Math.random() * Math.PI * 2,
-        phaseSpeed: 0.006 + Math.random() * 0.009,
-        // firing state
-        firing:     false,
-        fireAlpha:  0,
-        fireDecay:  0.018 + Math.random() * 0.014,
-        // propagation target — which neighbours will fire next
-        propagateTo: [],
-        propDelay:   0,
-      });
-      if (hub) hubIndices.push(i);
+const light1 = new THREE.DirectionalLight(0xffffff, 2.5);
+light1.position.set(3,3,5);
+scene.add(light1);
+
+const light2 = new THREE.AmbientLight(0x8888ff,1.4);
+scene.add(light2);
+
+const loader = new GLTFLoader();
+
+let brain;
+
+loader.load(
+    "models/human_brain.glb",
+
+    function(gltf){
+
+        brain = gltf.scene;
+
+        brain.scale.set(1.4,1.4,1.4);
+
+        brain.rotation.y = Math.PI/8;
+
+        scene.add(brain);
+
+    },
+
+    undefined,
+
+    function(err){
+        console.error(err);
+    }
+);
+
+function animate(){
+
+    requestAnimationFrame(animate);
+
+    if(brain){
+
+        brain.rotation.y += 0.003;
+
     }
 
-    // Pre-compute adjacency for propagation (edges within CONN_DIST)
-    for (let i = 0; i < nodes.length; i++) {
-      nodes[i].propagateTo = [];
-      for (let j = 0; j < nodes.length; j++) {
-        if (i === j) continue;
-        const dx = nodes[j].x - nodes[i].x, dy = nodes[j].y - nodes[i].y;
-        if (Math.sqrt(dx*dx + dy*dy) < CONN_DIST) {
-          nodes[i].propagateTo.push(j);
-        }
-      }
-    }
-  }
-  init();
+    renderer.render(scene,camera);
 
-  // Trigger a fire wave from node i
-  function fire(i) {
-    const n = nodes[i];
-    if (n.firing && n.fireAlpha > 0.5) return; // already firing strongly
-    n.firing    = true;
-    n.fireAlpha = 1.0;
-    // randomly propagate to 1-3 neighbours after a short delay
-    const count = 1 + Math.floor(Math.random() * 3);
-    const targets = n.propagateTo.slice().sort(() => Math.random() - 0.5).slice(0, count);
-    targets.forEach(j => {
-      setTimeout(() => { if (nodes[j]) fire(j); }, 60 + Math.random() * 180);
-    });
-  }
+}
 
-  // ── Drift particles ──
-  const PART_COUNT = 80;
-  let parts = [];
+animate();
 
-  function spawnPart(random) {
-    return {
-      x:     random ? Math.random() * W : (Math.random() < 0.5 ? -4 : W + 4),
-      y:     random ? Math.random() * H : Math.random() * H,
-      r:     0.5 + Math.random() * 0.9,
-      vx:    (Math.random() - 0.5) * 0.18,
-      vy:    -0.04 - Math.random() * 0.1,
-      alpha: 0.06 + Math.random() * 0.16,
-      life:  1.0,
-      decay: 0.0006 + Math.random() * 0.0008,
-    };
-  }
+window.addEventListener("resize",()=>{
 
-  function initParts() {
-    parts = [];
-    for (let i = 0; i < PART_COUNT; i++) parts.push(spawnPart(true));
-  }
-  initParts();
+    camera.aspect =
+        container.clientWidth /
+        container.clientHeight;
 
-  function drawFrame() {
-    ctx.clearRect(0, 0, W, H);
+    camera.updateProjectionMatrix();
 
-    // ── Edges ──
-    for (let i = 0; i < nodes.length; i++) {
-      const ni = nodes[i];
-      for (let j = i + 1; j < nodes.length; j++) {
-        const nj = nodes[j];
-        const dx = nj.x - ni.x, dy = nj.y - ni.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist > CONN_DIST) continue;
+    renderer.setSize(
+        container.clientWidth,
+        container.clientHeight
+    );
 
-        const proximity  = 1 - dist / CONN_DIST;
-        const fireBoost  = (ni.fireAlpha + nj.fireAlpha) * 0.4;
-        const edgeAlpha  = Math.min(proximity * 0.22 + fireBoost * 0.5, 0.75);
-
-        // hub-to-hub edges are slightly brighter (white matter tracts)
-        const isWhiteMatter = ni.hub && nj.hub;
-        ctx.beginPath();
-        ctx.moveTo(ni.x, ni.y);
-        ctx.lineTo(nj.x, nj.y);
-        ctx.strokeStyle = isWhiteMatter
-          ? `rgba(190,180,240,${edgeAlpha})`
-          : VC(edgeAlpha * 0.85);
-        ctx.lineWidth = isWhiteMatter ? 0.9 : 0.5;
-        ctx.stroke();
-      }
-    }
-
-    // ── Nodes ──
-    for (let i = 0; i < nodes.length; i++) {
-      const n = nodes[i];
-
-      // idle pulse
-      n.phase += n.phaseSpeed;
-      const pulse = (Math.sin(n.phase) * 0.5 + 0.5); // 0-1
-
-      // spontaneous firing
-      if (!n.firing && Math.random() < FIRE_PROB) fire(i);
-
-      // decay fire
-      if (n.firing) {
-        n.fireAlpha -= n.fireDecay;
-        if (n.fireAlpha <= 0) { n.fireAlpha = 0; n.firing = false; }
-      }
-
-      const baseAlpha  = 0.3 + pulse * 0.25;
-      const totalAlpha = Math.min(baseAlpha + n.fireAlpha * 0.65, 1.0);
-      const radius     = n.r + (n.firing ? n.fireAlpha * (n.hub ? 5 : 3) : 0);
-
-      // glow halo when firing
-      if (n.firing && n.fireAlpha > 0.05) {
-        const haloR = radius * (n.hub ? 6 : 4.5);
-        const grd   = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, haloR);
-        grd.addColorStop(0, VC2(n.fireAlpha * 0.5));
-        grd.addColorStop(1, VC2(0));
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, haloR, 0, Math.PI * 2);
-        ctx.fillStyle = grd;
-        ctx.fill();
-      }
-
-      // soma (cell body)
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = VC2(totalAlpha);
-      ctx.fill();
-
-      // drift
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < -30) n.x = W + 30;
-      if (n.x > W+30) n.x = -30;
-      if (n.y < -30) n.y = H + 30;
-      if (n.y > H+30) n.y = -30;
-    }
-
-    // ── Drift particles ──
-    for (let i = parts.length - 1; i >= 0; i--) {
-      const p = parts[i];
-      p.x += p.vx; p.y += p.vy;
-      p.life -= p.decay;
-      if (p.life <= 0 || p.y < -10) { parts[i] = spawnPart(false); continue; }
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = WC(p.alpha * p.life);
-      ctx.fill();
-    }
-
-    requestAnimationFrame(drawFrame);
-  }
-
-  drawFrame();
-
-  // Seed a few initial fires to show life immediately on load
-  setTimeout(() => { hubIndices.slice(0,3).forEach(i => fire(i)); }, 400);
-})();
+});
 </script>
 </body>
 </html>
