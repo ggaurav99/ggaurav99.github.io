@@ -54,26 +54,7 @@ function animate() {
     
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    ctx.save();
     
-    ctx.beginPath();
-
-    ctx.rect(0, 0, canvas.width, canvas.height);
-
-// Hero text region
-    const hero = document.getElementById("hero");
-    const r = hero.getBoundingClientRect();
-
-ctx.roundRect(
-    r.left - 40,
-    r.top - 40,
-    r.width + 80,
-    r.height + 80,
-    40
-);
-
-ctx.clip("evenodd");
-
 
 
     particles.forEach(p => {
@@ -115,7 +96,7 @@ ctx.clip("evenodd");
         ctx.stroke();
 
     });
-      ctx.restore();
+      
     requestAnimationFrame(animate);
 
 }
