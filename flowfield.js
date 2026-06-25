@@ -61,12 +61,15 @@ function animate() {
     ctx.rect(0, 0, canvas.width, canvas.height);
 
 // Hero text region
-    ctx.roundRect(
-      20,
-      120,
-      900,
-      500,
-      30
+    const hero = document.getElementById("hero");
+    const r = hero.getBoundingClientRect();
+
+ctx.roundRect(
+    r.left - 40,
+    r.top - 40,
+    r.width + 80,
+    r.height + 80,
+    40
 );
 
 ctx.clip("evenodd");
