@@ -119,7 +119,7 @@
     }
     .hero-sub {
       font-family: 'Source Serif 4', serif; 
-      font-size: 1.1rem;
+      font-size: 0.97rem;
       font-weight: 800; 
       font-style: italic; color: var(--fog);
       margin-bottom: 0.4rem;
@@ -177,7 +177,7 @@
 
     /* ABOUT */
     .about-body { display: grid; grid-template-columns: 1.4fr 1fr; gap: 4rem; align-items: start; }
-    .about-text p { color: var(--fog); font-weight: 300; margin-bottom: 1.1rem; font-size: 0.97rem; }
+    .about-text p { color: var(--fog1); font-weight: 300; margin-bottom: 1.1rem; font-size: 0.97rem; }
     .about-text p strong { color: var(--cream); font-weight: 400; }
     .aside-box { background: var(--slate); border: 1px solid var(--rule2); border-radius: var(--radius); padding: 1.5rem; }
     .aside-box-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--violet); margin-bottom: 1.25rem; }
@@ -189,7 +189,7 @@
 
     /* SKILLS */
     .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--rule2); border: 1px solid var(--rule2); border-radius: var(--radius); overflow: hidden; }
-    .skill-cat { background: var(--bg2); padding: 1.75rem; }
+    .skill-cat { background: var(--bg2); padding: 1.7rem; }
     .skill-cat-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--violet); margin-bottom: 1rem; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .tag { background: var(--violet-dim); border: 1px solid var(--rule2); color: var(--fog); font-size: 0.78rem; padding: 0.22rem 0.65rem; border-radius: 2px; font-family: 'Source Serif 4', serif; font-style: italic; }
@@ -223,8 +223,8 @@
     .trek-name { font-size: 0.85rem; color: var(--cream); }
     .trek-loc { font-size: 0.71rem; color: var(--muted); }
     .beyond-card-wide { grid-column: 1/-1; }
-    .phil-quote { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-style: italic; color: var(--fog); line-height: 1.9; border-left: 2px solid var(--violet); padding-left: 1.25rem; margin-bottom: 1.25rem; }
-    .phil-note { font-size: 0.9rem; color: var(--fog); font-weight: 300; line-height: 1.9; margin-bottom: 0.9rem; }
+    .phil-quote { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: var(--viole2); line-height: 1.9; border-left: 2px solid var(--violet); padding-left: 1.25rem; margin-bottom: 1.25rem; }
+    .phil-note { font-size: 0.9rem; color: var(--fog2); font-weight: 300; line-height: 1.9; margin-bottom: 0.9rem; }
 
     /* CONTACT */
     .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: start; }
@@ -305,7 +305,7 @@
     <span class="hero-topic-line">Computational Neuroscience.</span>
   </div>
   <div class="hero-rule"></div>
-  <p class="hero-sub">The highest activity a human being can attain is learning for understanding, because to understand is to be free. - Baruch Spinoza </p>
+  <p class="hero-sub">Truth has to be given in riddles. People can't take truth if it comes charging at them like a bull. The bull is always killed. You have to give people the truth in a riddle, hide it so they go looking for it and find it piece by piece; that way they learn to live with it. - Chaim Potok, The Gift of Asher Lev</p>
   <p class="hero-institution">Applied Mathematics · Control Theory · Philosophy · Music</p>
   <div class="hero-cta">
     <a href="#projects" class="btn btn-primary">View research</a>
@@ -437,13 +437,9 @@
       <div class="beyond-card">
         <div class="beyond-card-title">Current bookshelf</div>
         <div class="book-list">
-          <div class="book-item"><div class="book-title">The Story of Philosophy</div><div class="book-author">Will Durant</div></div>
-          <div class="book-item"><div class="book-title">The Plague</div><div class="book-author">Albert Camus</div></div>
-          <div class="book-item"><div class="book-title">The Fourth K</div><div class="book-author">Mario Puzo</div></div>
-          <div class="book-item"><div class="book-title">The Godfather</div><div class="book-author">Mario Puzo</div></div>
-          <div class="book-item"><div class="book-title">Lacan</div><div class="book-author">Sean Homer</div></div>
-          <div class="book-item"><div class="book-title">Sigmund Freud</div><div class="book-author">Pamela Thurschwell</div></div>
-          <div class="book-item"><div class="book-title">A Critical Survey of Indian Philosophy</div><div class="book-author">C.D. Sharma</div></div>
+          <div class="book-item"><div class="book-title">The Count of Monte Cristo </div><div class="book-author">Alexander Dumas</div></div>
+          <div class="book-item"><div class="book-title">Right Ho, Jeeves</div><div class="book-author">P.G Wodehouse</div></div>
+          <div class="book-item"><div class="book-title">Old Men at Midnight</div><div class="book-author">Chaim Potok</div></div>
         </div>
       </div>
       <div class="beyond-card">
@@ -458,12 +454,13 @@
       </div>
       <div class="beyond-card beyond-card-wide">
         <div class="beyond-card-title">On philosophy &amp; reading</div>
-        <p class="phil-quote">"Books allow me to inhabit minds shaped by completely different times, places, and circumstances — and that is the most reliable way I know to think beyond myself."</p>
-        <p class="phil-note">My relationship with philosophy began not in a classroom but through a personal inflection point — an experience that forced me to question whether what I believed was genuinely mine, or simply the product of my surroundings: family, peers, school, the particular corner of society I grew up in. It was, in retrospect, an encounter with survivorship bias.</p>
+        <p class="phil-quote">"Literature presents you with alternate mappings of the human experience. You see that the experiences of other people and other cultures are as rich, coherent, and troubled as your own experiences. They are as beset with suffering as yours. Literature is a kind of legitimate voyeurism through the keyhole of language where you really come to know other people's lives--their anguish, their loves, their passions. Often you discover that once you dive into those lives and get below the surface, the veneer, there is a real closeness.”
+― Chaim Potok</p>
+        <p class="phil-note">Since early childhood I had a philosophical bent, perhaps because of the kind of music and folklore I was introduced to by my parents at a very early stage.My first teachers of life itself(after my parents) are Bulleh Shah and Kabir . As I grew older, I naturally delved more into philosophy . Started with Sophie's World by Jostein Gaarder which gave me a very gentle introduction to philosophy, lierally written for a 15 year old, hence very a hand-holding book. The next book was The Story of Philosophy by Will Durant which is also a great introduction to anyone who is new to the subject.These two books made me adept at reading philosophy (disclaimer : no claim about understanding, jk , or am I ) .</p>
         <br>
-        <p class="phil-note">That sent me to <em>Sophie's World</em>, then Will Durant, then a critical survey of Indian philosophy. What struck me was simple: people who lived centuries ago, in completely different parts of the world, with no shared cultural context — thought radically differently. If they could arrive at such different conclusions, how certain could I be about my own? Books became the tool for borrowing 60–70 years of someone else's thinking in 300 pages. That still strikes me as an extraordinary deal.</p>
+        <p class="phil-note">What struck me was simple: people who lived centuries apart, in completely different parts of the world, with no shared cultural context at times thought radically differently and yet there was always a shared ground . the most interesting thing is that most of them make very compelling antipodal arguments , very difficult to refute. If they could arrive at such different conclusions, how certain could I be about my own? I think books are great tools for borrowing 60–70 years of someone else's thinking and experience in few 100-1000 pages. Strikes me as an extraordinary deal, perhaps the best of all deals ever.</p>
         <br>
-        <p class="phil-note">Today my interests span Stoicism, psychoanalytic theory (Freud, Lacan), the philosophy of mind, and the question of what it means to think freely in a world that is constantly trying to think for you.</p>
+        <p class="phil-note">My reading interests span philosophy(Eastern and Western), psychoanalytic theory (especially Lacan) and fiction, lots of fiction !! .</p>
       </div>
     </div>
   </div>
@@ -478,7 +475,7 @@
     </div>
     <div class="contact-grid">
       <div class="contact-info">
-        <p>Whether it's a research collaboration, an interesting problem, a book recommendation, or something else entirely — reach out. I read everything.</p>
+        <p>Whether it's a research collaboration, a book/music/movie recommendation, or to chat in general — reach out.</p>
         <div class="socials">
           <a href="https://github.com/ggaurav99" class="social-link" target="_blank"><span class="social-icon">gh://</span><span>github.com/ggaurav99</span></a>
           <a href="https://www.linkedin.com/in/gaurav-gupta-a566aa278/" class="social-link" target="_blank"><span class="social-icon">li://</span><span>linkedin.com/in/gaurav-gupta</span></a>
