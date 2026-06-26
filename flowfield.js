@@ -50,7 +50,7 @@ function animate() {
 
     t += 0.003;
 
-    ctx.fillStyle = "rgba(10,11,16,0.2)";
+    ctx.fillStyle = "rgba(10,11,16,0.1)";
     
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
