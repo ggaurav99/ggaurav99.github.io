@@ -91,7 +91,7 @@ function animate() {
         p.y + uy * len / 2
       );
 
-        ctx.strokeStyle = "rgba(169,159,224,0.17)";
+        ctx.strokeStyle = "rgba(169,159,250,0.2)";
         ctx.lineWidth = 1.1;
         ctx.stroke();
 
