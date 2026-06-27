@@ -55,7 +55,7 @@
     }
     .nav-logo {
       font-family: 'DM Mono', monospace;
-      font-size: 0.97rem; 
+      font-size: 1.3rem; 
       font-weight : 600 ;
       letter-spacing: 0.14em;
       color: var(--violet1); 
@@ -65,7 +65,7 @@
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
       font-family: 'DM Mono', monospace; 
-      font-size: 0.9rem;
+      font-size: 1.3rem;
       font-weight : 600 ;
       letter-spacing: 0.14em; 
       text-transform: uppercase;
@@ -112,7 +112,7 @@
 }
     .hero-name-small {
       font-family: 'DM Mono', monospace;
-      font-size: 0.72rem; 
+      font-size: 0.912rem; 
       font-weight:700 ;
       letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--cream);
@@ -151,7 +151,7 @@
     }
     .hero-sub {
       font-family: 'Source Serif 4', serif; 
-      font-size: 0.97rem;
+      font-size: 1.04rem;
       font-weight: 800; 
       font-style: italic; color: var(--fog);
       margin-bottom: 0.4rem;
@@ -201,14 +201,18 @@
       color: var(--violet); flex-shrink: 0;
     }
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 600;
-      line-height: 1.15; color: var(--cream);
-    }
+  display: inline-block;
+  background: var(--slate);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--rule2);
+  border-radius: var(--radius);
+  padding: 0.35rem 0.9rem;
+}
     .section-title em { font-style: italic; font-weight: 400; color: var(--violet2); }
 
     /* ABOUT */
-    .about-body { display: grid; grid-template-columns: 1.4fr 1fr; gap: 4rem; align-items: start; }
+    .about-body { display: grid; grid-template-columns: 3.0fr 0.5fr; gap: 4rem; align-items: start; }
     .about-text{
 
     background: rgba(12,13,20,0.26);
@@ -222,32 +226,32 @@
 
     padding: 2rem;
 }
-    .about-text p { color: var(--fog1); font-weight: 300; margin-bottom: 1.1rem; font-size: 0.97rem; }
+    .about-text p { color: var(--fog1);font-weight: 300; margin-bottom: 1.1rem; font-size: 1.2rem; }
     .about-text p strong { color: var(--cream); font-weight: 400; }
     .aside-box { background: var(--slate); border: 1px solid var(--rule2); border-radius: var(--radius); padding: 1.5rem; }
-    .aside-box-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--violet); margin-bottom: 1.25rem; }
+    .aside-box-title { font-family: 'DM Mono', monospace; font-size: 0.90rem ;font-weight : 600; letter-spacing: 0.10em; text-transform: uppercase; color: var(--cream); margin-bottom: 1.25rem; }
     .stat-pair { margin-bottom: 1.1rem; }
     .stat-pair:last-child { margin-bottom: 0; }
     .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--cream); line-height: 1; }
-    .stat-desc { font-size: 0.74rem; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 0.05em; margin-top: 0.1rem; }
+    .stat-desc { font-size: 0.74rem; color: var(--cream); font-family: 'DM Mono', monospace; letter-spacing: 0.05em; margin-top: 0.1rem; }
     .aside-divider { height: 1px; background: var(--rule); margin: 1.1rem 0; }
 
     /* SKILLS */
     .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--rule2); border: 1px solid var(--rule2); border-radius: var(--radius); overflow: hidden; }
     .skill-cat { background: var(--bg2); padding: 1.7rem; }
-    .skill-cat-title { font-family: 'DM Mono', monospace; font-size: 0.62rem;font-weight:600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream1); margin-bottom: 1rem; }
+    .skill-cat-title { font-family: 'DM Mono', monospace; font-size: 1.2rem;font-weight:600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream1); margin-bottom: 1rem; }
     .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .tag { background: var(--violet-dim); border: 1px solid var(--rule2); color: var(--fog2); font-size: 0.78rem; padding: 0.22rem 0.65rem; border-radius: 2px; font-family: 'Source Serif 4', serif; font-style: italic; }
+    .tag { background: var(--violet-dim); font-weight :500; font-weight: 500;font-size: 1rem ; border: 1px solid var(--rule2); color: var(--fog2);padding: 0.22rem 0.65rem; border-radius: 2px; font-family: 'Source Serif 4', serif; font-style: italic; }
 
     /* PROJECTS */
     .projects-list { display: flex; flex-direction: column; gap: 2px; }
     .project-card { background: var(--bg2); border: 1px solid var(--rule2); border-radius: var(--radius); padding: 2rem 2.25rem; transition: border-color 0.25s, background 0.25s; }
     .project-card:hover { border-color: var(--violet); background: var(--slate); }
     .proj-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.85rem; }
-    .proj-badge { font-family: 'DM Mono', monospace; font-size: 0.59rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--violet2); border: 1px solid var(--violet); border-radius: 2px; padding: 0.15rem 0.55rem; }
-    .proj-status { font-family: 'DM Mono', monospace; font-size: 0.61rem; color: var(--muted); letter-spacing: 0.08em; }
-    .proj-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--cream); margin-bottom: 0.75rem; line-height: 1.3; }
-    .proj-desc { font-size: 0.9rem; color: var(--fog); font-weight: 300; line-height: 1.85; margin-bottom: 1.25rem; }
+    .proj-badge { font-family: 'DM Mono', monospace; font-size: 0.79rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--violet2); border: 1px solid var(--violet); border-radius: 2px; padding: 0.15rem 0.55rem; }
+    .proj-status { font-family: 'DM Mono', monospace; font-size: 0.61rem; color: var(--cream1); letter-spacing: 0.08em; }
+    .proj-title { font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 600; color: var(--cream); margin-bottom: 0.75rem; line-height: 1.3; }
+    .proj-desc { font-size: 1.2rem; color: var(--fog); font-weight: 300; line-height: 1.85; margin-bottom: 1.25rem; }
     .proj-desc strong { color: var(--cream); font-weight: 400; }
     .proj-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
     .proj-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
@@ -271,7 +275,7 @@
     border-radius:4px;
 
     font-family:'DM Mono', monospace;
-    font-size:0.68rem;
+    font-size:0.98rem;
     letter-spacing:0.05em;
 
     color:var(--violet2);
@@ -293,7 +297,85 @@
       transform:translateY(-2px);
 
 }
+/* COURSEWORK */
+#coursework {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px !important;
+  margin: 0 auto;
+  padding: 5rem 3.5rem;
+  box-sizing: border-box;
+}
 
+.coursework-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.cw-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cw-column-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.98rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--cream);
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--rule2);
+  border-radius: var(--radius);
+  background: var(--slate2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  margin-bottom: 0.25rem;
+  display: inline-block;
+}
+
+.cw-card {
+  background: var(--slate);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  transition: border-color 0.2s;
+}
+
+.cw-card:hover {
+  border-color: var(--violet-dim);
+}
+
+.cw-course {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
+}
+
+.cw-instructor {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--violet2);
+  margin-bottom: 0.3rem;
+}
+
+.cw-ref {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--fog);
+  line-height: 1.4;
+}
+
+@media (max-width: 700px) {
+  .coursework-grid { grid-template-columns: 1fr; }
+}
     /* BEYOND */
     .beyond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     .beyond-card { background: var(--bg2); border: 1px solid var(--rule2); border-radius: var(--radius); padding: 1.75rem; }
@@ -399,6 +481,201 @@
       .fade-in, .hero-topic-line { transition: none; animation: none; opacity: 1; transform: none; }
     }
     
+
+    /* ── TYPOGRAPHY SYSTEM (keyed to Research section) ── */
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--cream);
+  display: inline-block;
+  background: var(--slate);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--rule2);
+  border-radius: var(--radius);
+  padding: 0.35rem 0.9rem;
+}
+
+.about-text p,
+.proj-desc,
+.phil-note,
+.contact-info p {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--violet1);
+}
+
+.about-text p strong,
+.proj-desc strong {
+  color: var(--cream);
+  font-weight: 400;
+}
+
+.proj-title,
+.beyond-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+.beyond-card-title {
+  font-size: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1.5rem;
+}
+
+.proj-badge,
+.cw-column-label,
+.skill-cat-title,
+.aside-box-title {
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.proj-badge {
+  font-size: 0.79rem;
+  color: var(--violet2);
+  border: 1px solid var(--violet);
+  border-radius: 2px;
+  padding: 0.15rem 0.55rem;
+}
+
+.proj-status {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--cream);
+  letter-spacing: 0.08em;
+}
+
+.skill-cat-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 1rem;
+}
+
+.aside-box-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 1.25rem;
+}
+
+.tag {
+  font-family: 'Source Serif 4', serif;
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--cream);
+  background: var(--violet1);
+  border: 1px solid var(--rule2);
+  border-radius: 2px;
+  padding: 0.22rem 0.65rem;
+}
+
+.paper-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.98rem;
+  letter-spacing: 0.05em;
+}
+
+.cw-course {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
+}
+
+.cw-instructor {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--violet2);
+  margin-bottom: 0.3rem;
+}
+
+.cw-ref {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--fog1);
+  line-height: 1.4;
+}
+
+.book-title {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--cream);
+}
+
+.book-author {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.87rem;
+  color: var(--violet2);
+  margin-top: 0.1rem;
+  letter-spacing: 0.06em;
+}
+
+.trek-name {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.99rem;
+  color: var(--cream);
+}
+
+.trek-alt {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.74rem;
+  color: var(--cream);
+  min-width: 64px;
+  flex-shrink: 0;
+}
+
+.trek-loc {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.61rem;
+  color: var(--violet2);
+}
+
+.phil-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.9;
+  border-left: 2px solid var(--violet);
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--cream);
+  line-height: 1;
+}
+
+.stat-desc {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.74rem;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+  margin-top: 0.1rem;
+}
   </style>
  
 </head>
@@ -522,7 +799,7 @@
           <span class="proj-status">Almost Completed</span>
         </div>
         <div class="proj-title">SVITR Disease Model with Behavioural Dynamics</div>
-        <p class="proj-desc">A coupled epidemiological-behavioural model where disease dynamics are shaped by individual decision-making and vice-versa . Using the <strong>Prelec probability weighting function</strong>, the model captures how optimism, scepticism, and information access distort perceived risk. Combined with <strong>hyperbolic discounting</strong> — which models how impatience affects decisions over time — the model computes perceived payoffs for each strategy (vaccination, antibiotics, or none). These payoffs feed back into disease dynamics, creating a genuine two-way system between behaviour and contagion.</p>
+        <p class="proj-desc">Under the guidance of Dr. Samit Bhattacharrya we have developed a coupled epidemiological-behavioural model where disease dynamics are shaped by individual decision-making and vice-versa . Using the <strong>Prelec probability weighting function</strong>, the model captures how optimism, scepticism, and information access distort perceived risk. Combined with <strong>hyperbolic discounting</strong> — which models how impatience affects decisions over time — the model computes perceived payoffs for each strategy (vaccination, antibiotics, or none). These payoffs feed back into disease dynamics, creating a genuine two-way system between behaviour and contagion.</p>
         <div class="proj-footer">
 
     <div class="proj-stack tags">
@@ -549,11 +826,11 @@
       </div>
       <div class="project-card">
         <div class="proj-meta">
-          <span class="proj-badge">Computational Neuroscience</span>
+          <span class="proj-badge">DRDO · Computational Neuroscience</span>
           <span class="proj-status">Ongoing</span>
         </div>
         <div class="proj-title">Brain Controllability &amp; Trait Anxiety Correlates</div>
-        <p class="proj-desc">The standard way to diagnose trait anxiety is the STAI — a self-report questionnaire dependent entirely on patient honesty. This research tries to find an objective alternative. Using <strong>Network Control Theory</strong> applied to brain connectomes, we assess the controllability of different brain regions: how easily each region can steer the brain into different activity states. The goal is to find controllability metrics that correlate with STAI scores, so a clinician can compute a diagnosis from brain scans without requiring self-report.</p>
+        <p class="proj-desc">The standard way to diagnose trait anxiety is the STAI — a self-report questionnaire dependent entirely on patient honesty. Under the guidance of Dr. Shilpi Modi, this research tries to find an objective alternative. Using <strong>Network Control Theory</strong> applied to brain connectomes, we assess the controllability of different brain regions: how easily each region can steer the brain into different activity states. The goal is to find controllability metrics that correlate with STAI scores, so a clinician can compute a diagnosis from brain scans without requiring self-report.</p>
         <div class="proj-footer">
 
     <div class="proj-stack tags">
@@ -664,7 +941,106 @@
 </div>
 
 </section>
+<!-- Coursework -->
+<section id="coursework">
+  <div class="fade-in">
+    <div class="section-header">
+      <div class="section-label"></div>
+      <h2 class="section-title">Coursework</h2>
+    </div>
 
+    <div class="coursework-grid">
+
+      <!-- Column 1: Foundations & Calculus -->
+      <div class="cw-column">
+        <div class="cw-column-label">Foundations &amp; Calculus</div>
+
+        <div class="cw-card">
+          <div class="cw-course">Logic &amp; Proof Writing</div>
+          <div class="cw-instructor">Dr. Amber Habib</div>
+          <div class="cw-ref">How to Prove It, D.J. Velleman</div>
+        </div>
+
+        <div class="cw-card">
+          <div class="cw-course">Single Variable Calculus</div>
+          <div class="cw-instructor">Dr. Amber Habib</div>
+          <div class="cw-ref">Calculus, Vol. I - Apostol</div>
+        </div>
+
+        <div class="cw-card">
+          <div class="cw-course">Multi-Variate Calculus</div>
+          <div class="cw-instructor">Dr. Amber Habib</div>
+          <div class="cw-ref">Calculus, Vol. II — Apostol</div>
+        </div>
+
+        <div class="cw-card">
+          <div class="cw-course">Vector Calculus</div>
+          <div class="cw-instructor">Dr. Pradip Kumar</div>
+          <div class="cw-ref">Vector Calculus ,Peter Baxandall</div>
+        </div>
+      </div>
+
+      <!-- Column 2: Algebra & Analysis -->
+      <div class="cw-column">
+        <div class="cw-column-label">Algebra &amp; Analysis</div>
+
+        <div class="cw-card">
+          <div class="cw-course">Linear Algebra I</div>
+          <div class="cw-instructor">Dr. Pradip Mishra</div>
+          <div class="cw-ref">Linear Algebra Done Right ,Sheldon Axler</div>
+        </div>
+
+        <div class="cw-card">
+          <div class="cw-course">Linear Algebra II</div>
+          <div class="cw-instructor">Dr. Amber Habib</div>
+          <div class="cw-ref">Linear Algebra , Friedberg</div>
+        </div>
+
+        <div class="cw-card">
+          <div class="cw-course">Real Analysis I</div>
+          <div class="cw-instructor">Dr. Niteesh Sahni</div>
+          <div class="cw-ref">Introduction to Real Analysis , Bartle &amp; Sherbert</div>
+        </div>
+
+        <div class="cw-card">
+          <div class="cw-course">Real Analysis II</div>
+          <div class="cw-instructor">Dr. Sudip Ranjan Bhuia</div>
+          <div class="cw-ref">Principles of Mathematical Analysis ,Walter Rudin</div>
+        </div>
+      </div>
+
+      <!-- Column 3: Applied & Differential -->
+      <div class="cw-column">
+        <div class="cw-column-label">Applied &amp; Differential</div>
+
+        <div class="cw-card">
+          <div class="cw-course">Ordinary Differential Equations</div>
+          <div class="cw-instructor">Dr. Samit Bhattacharya</div>
+          <div class="cw-ref">Differential Equations , Simmons &amp; Krantz</div>
+        </div>
+
+        <div class="cw-card">
+          <div class="cw-course">Partial Differential Equations</div>
+          <div class="cw-instructor">Dr. Samit Bhattacharya</div>
+          <div class="cw-ref">PDEs for Scientists &amp; Engineers , Farlow</div>
+        </div>
+
+        <div class="cw-card">
+          <div class="cw-course">Probability</div>
+          <div class="cw-instructor">Dr. Dipti Dubey</div>
+          <div class="cw-ref">A First Course in Probability , Sheldon Ross</div>
+        </div>
+
+        <div class="cw-card">
+          <div class="cw-course">Optimization</div>
+          <div class="cw-instructor">Dr. Dipti Dubey</div>
+          <div class="cw-ref">Linear Programming ,G Hadley</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 <!-- BEYOND -->
 <section id="beyond">
   <div class="fade-in">
